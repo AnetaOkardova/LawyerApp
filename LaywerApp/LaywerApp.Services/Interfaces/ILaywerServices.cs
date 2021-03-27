@@ -11,5 +11,7 @@ namespace LaywerApp.Services.Interfaces
         Article GetArticleById(int id);
         List<LawService> GetServicesByTitle(string title);
         LawService GetLawServicesById(int id);
+        List<Collaborator> GetCollaboratorsByName(string name);
+        Collaborator GetCollaboratorById(int id);
     }
 }

@@ -13,5 +13,8 @@ namespace LaywerApp.Repositories
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<LawService> LawServices { get; set; }
+        public DbSet<Collaborator> Collaborators { get; set; }
+
+
     }
 }

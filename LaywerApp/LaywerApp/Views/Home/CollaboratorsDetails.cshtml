@@ -1,0 +1,25 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model LaywerApp.Models.Collaborator
+
+
+@{
+    ViewBag.Title = "Collaborator's details";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center p-5">
+        <div class="col text-justify">
+            <h1 class="text-center">@Model.Status @Model.Name @Model.LastName</h1>
+            <div class="row">
+                <div class="col-3">
+                    <img class="p-5 justify-content-md-center align-content-center w-100" src="@Model.ImageUrl" alt="Alternate Text" />
+                </div>
+                <div class="col-9">
+                    <p class="p-5">@Model.About</p>
+                </div>
+            </div>
+            <h6 class="p-5">Contact e-mail: @Model.Email</h6>
+        </div>
+    </div>
+</div>

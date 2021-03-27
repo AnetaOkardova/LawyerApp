@@ -10,11 +10,14 @@ namespace LaywerApp.Services
     {
         private IArticlesRepository _articlesRepository { get; set; }
         private ILawServicesRepository _lawServicesRepository { get; set; }
+        private ICollaboratorsRepository _collaboratorsRepository { get; set; }
 
-        public LaywerServices(IArticlesRepository articlesRepository, ILawServicesRepository lawServicesRepository)
+
+        public LaywerServices(IArticlesRepository articlesRepository, ILawServicesRepository lawServicesRepository, ICollaboratorsRepository collaboratorsRepository)
         {
             _articlesRepository = articlesRepository;
             _lawServicesRepository = lawServicesRepository;
+            _collaboratorsRepository = collaboratorsRepository;
         }
         public List<Article> GetArticlesByTitle(string title)
         {
@@ -66,6 +69,31 @@ namespace LaywerApp.Services
             }
 
             return selectedService;
+        }
+
+        public List<Collaborator> GetCollaboratorsByName(string name)
+        {
+            if (name == null)
+            {
+                return _collaboratorsRepository.GetAll();
+            }
+            else
+            {
+                return _collaboratorsRepository.GetByName(name);
+            }
+        }
+
+        public Collaborator GetCollaboratorById(int id)
+        {
+            var selectedCollaborator = _collaboratorsRepository.GetById(id);
+
+            if (selectedCollaborator == null)
+            {
+                //implementiraj go ova
+                throw new ArgumentNullException();
+            }
+
+            return selectedCollaborator;
         }
     }
 }
