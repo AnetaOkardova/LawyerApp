@@ -59,47 +59,74 @@
 </div>
 
 <div class="container-fluid" id="aboutUs">
-    <div cllas="row">
-        <div class="col-md-6">
-            <div class="row justify-content-sm-center p-5">
-                <h1>За нас</h1>
-                <p class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Ut ullamcorper, quam sed pulvinar pharetra, elit dolor viverra erat,
-                    vel pretium erat sem nec tortor. Cras eget nulla lorem. Donec auctor,
-                    mauris quis finibus consequat, augue sem malesuada nisi, eget lobortis libero
-                    erat finibus ante. In dictum elit accumsan iaculis mattis. Nam maximus leo enim,
-                    eget tempus purus rhoncus eget. Fusce urna diam, molestie vitae commodo in, blandit eu
-                    felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                    Mauris elit elit, ornare tincidunt nulla quis, euismod vehicula justo. Cras semper ante erat,
-                    sed efficitur velit rutrum et. Aenean mattis, eros ac feugiat vehicula, lacus libero bibendum
-                    massa, ac lobortis tellus ex vel risus. Vivamus vitae aliquam nibh. Nam auctor aliquam lorem.
-                    \Nunc posuere purus et ex aliquam, nec bibendum ex tincidunt. Integer ultrices, lectus in
-                    accumsan pulvinar, justo nulla porttitor ipsum, ac ultricies nisi metus vel metus. Nunc rhoncus
-                    mi eu sapien congue, et ultricies leo lacinia. Aliquam vitae arcu ullamcorper mi tempor semper.
-                </p>
+    <div cllas="row justify-content-sm-center align-items-center">
+        <div class="col-7 d-inline-block p-5">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h1>За нас</h1>
+                    <p class="text-justify">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Ut ullamcorper, quam sed pulvinar pharetra, elit dolor viverra erat,
+                        vel pretium erat sem nec tortor. Cras eget nulla lorem. Donec auctor,
+                        mauris quis finibus consequat, augue sem malesuada nisi, eget lobortis libero
+                        erat finibus ante. In dictum elit accumsan iaculis mattis. Nam maximus leo enim,
+                        eget tempus purus rhoncus eget. Fusce urna diam, molestie vitae commodo in, blandit eu
+                        felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                        Mauris elit elit, ornare tincidunt nulla quis, euismod vehicula justo. Cras semper ante erat,
+                        sed efficitur velit rutrum et. Aenean mattis, eros ac feugiat vehicula, lacus libero bibendum
+                        massa, ac lobortis tellus ex vel risus. Vivamus vitae aliquam nibh. Nam auctor aliquam lorem.
+                        \Nunc posuere purus et ex aliquam, nec bibendum ex tincidunt. Integer ultrices, lectus in
+                        accumsan pulvinar, justo nulla porttitor ipsum, ac ultricies nisi metus vel metus. Nunc rhoncus
+                        mi eu sapien congue, et ultricies leo lacinia. Aliquam vitae arcu ullamcorper mi tempor semper.
+                        Curabitur consectetur ipsum a turpis scelerisque tincidunt. Donec dignissim magna eget faucibus convallis.
+                        Integer a tristique risus. In at tellus ligula. Sed accumsan mi ut dapibus faucibus. Duis libero sapien, facilisis sit amet sem id,
+                        iaculis elementum justo. Aliquam et metus dictum, egestas eros quis, euismod dolor. Integer viverra rhoncus massa a sodales. Nam viverra eget
+                        ligula a suscipit. Nullam in faucibus risus, id facilisis lacus. Ut iaculis, sapien quis aliquam lobortis, metus turpis molestie dolor, fermentum
+                        finibus diam nulla quis sapien. Cras felis nibh, varius a ante at, consequat posuere massa. Aenean euismod tempus velit, ut suscipit ligula dictum in.
+                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        Integer lacinia elit aliquam justo hendrerit cursus. Phasellus tempus tempus mi nec scelerisque. Mauris id faucibus enim. Nullam porttitor non magna nec imperdiet.
+                        Sed facilisis erat sed velit porttitor, at hendrerit magna venenatis. Aenean egestas facilisis velit, vel volutpat turpis vestibulum non. Quisque gravida viverra est,
+                        a auctor eros fermentum pulvinar. Etiam varius at felis a faucibus. Etiam vel pharetra orci.
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-
+        <div class="col-3 d-inline-block m-5 p-5">
+            <div class="row justify-content-center align-items-center">
+                <div class="col">
+                    <img src="https://media.tenor.com/images/93f62b10b4c590fbf0890782812e91d9/tenor.gif" style="width: 300px" />
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 
-
-<div class="row" id="articles">
-    @foreach (var article in Model)
-    {
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-                <img style="width: 100%; height: 300px" src="@article.ImageUrl" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@article.Title</h5>
-                    <p class="card-text">@article.ShortDescription</p>
-                    <a asp-controller="Home" asp-action="Details" asp-route-id="@article.Id" class="btn btn-success">See description</a>
+<div class="container-fluid overflow-auto" id="articles" style="height: 38rem">
+    <div class="row p-5 justify-content-center">
+        @foreach (var article in Model)
+        {
+            <div class="col-7 p-3">
+                <div class="cusomShadow"  style="width: 50rem; border: 1px solid black">
+                    <table>
+                        <tr>
+                            <td style="width: 30%">
+                                <img style="width: 100%; height: 150px" src="@article.ImageUrl" class="card-img-top" alt="...">
+                            </td>
+                            <td style="width:70%">
+                                <div class="card-body">
+                                    <h5 class="card-title">@article.Title</h5>
+                                    <p class="card-text">@article.ShortDescription</p>
+                                    <a asp-controller="Home" asp-action="ArticleDetails" asp-route-id="@article.Id" class="btn btn-success">See description</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+
+

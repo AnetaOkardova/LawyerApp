@@ -8,5 +8,8 @@ namespace LaywerApp.Services.Interfaces
     public interface ILaywerServices
     {
         List<Article> GetArticlesByTitle(string title);
+        Article GetArticleById(int id);
+        List<LawService> GetServicesByTitle(string title);
+        LawService GetLawServicesById(int id);
     }
 }

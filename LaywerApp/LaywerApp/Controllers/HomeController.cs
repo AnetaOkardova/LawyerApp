@@ -22,14 +22,30 @@ namespace LaywerApp.Controllers
             var articles = _service.GetArticlesByTitle(title);
             return View(articles);
         }
-        public IActionResult AboutUs()
+        public IActionResult ArticleDetails(int id)
         {
-            return View();
+            var article = _service.GetArticleById(id);
+            if (article == null)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+            return View(article);
         }
-        
-        public IActionResult Details()
+
+        public IActionResult LawService(string title)
         {
-            return View();
+            var services = _service.GetServicesByTitle(title);
+            return View(services);
+        }
+        public IActionResult LawServiceDetails(int id)
+        {
+            var service = _service.GetLawServicesById(id);
+
+            if (service == null)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+            return View(service);
         }
     }
 }
