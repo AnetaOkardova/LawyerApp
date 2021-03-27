@@ -1,6 +1,11 @@
+using LaywerApp.Repositories;
+using LaywerApp.Repositories.Interfaces;
+using LaywerApp.Services;
+using LaywerApp.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +28,10 @@ namespace LaywerApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<LaywerAppDbContext>(x => x.UseSqlServer("Server=(localDb)\\MSSQLLocalDB;Database= LaywerApp; Trusted_Connection=True;"));
             services.AddControllersWithViews();
+            services.AddTransient<ILaywerServices, LaywerServices>();
+            services.AddTransient<IArticlesRepository, ArticlesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 ﻿using LaywerApp.Models;
+using LaywerApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,14 +12,24 @@ namespace LaywerApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Main()
+        private ILaywerServices _service { get; set; }
+        public HomeController(ILaywerServices service)
         {
-            return View();
+            _service = service;
+        }
+        public IActionResult Main(string title)
+        {
+            var articles = _service.GetArticlesByTitle(title);
+            return View(articles);
         }
         public IActionResult AboutUs()
         {
             return View();
         }
-
+        
+        public IActionResult Details()
+        {
+            return View();
+        }
     }
 }
