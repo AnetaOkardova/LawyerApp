@@ -1,48 +1,90 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!Doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LaywerApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LaywerApp</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+    <div class="container-fluid p-0 mt-0 backgroundImage";
+        background-repeat: repeat">
+        <div class=" row justify-content-between">
+            <nav class="navbar navbar-expand-lg navbar-light customShadow container-fluid">
+                <div class="col">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item ">
+                            <a class="nav-link active" aria-current="page" href="/Home/Main">
+                                <image src="https://cdn.logo.com/hotlink-ok/logo-social.png" style="width:50px; height: 50px" class="navbar-brand" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <li class="nav-item">
+                                    <a class="nav-link active onHover" aria-current="page" href="/Home/Main">Почетна</a>
+                                </li>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <li class="nav-item">
+                                    <a class="nav-link active onHover" aria-current="page" href="/Home/AboutUs">За нас</a>
+                                </li>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <li class="nav-item">
+                                    <a class="nav-link active onHover" aria-current="page" href="#">Услуги</a>
+                                </li>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <li class="nav-item">
+                                    <a class="nav-link active onHover" aria-current="page" href="#">Соработници</a>
+                                </li>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <li class="nav-item">
+                                    <a class="nav-link active onHover" aria-current="page" href="#">Правни мислења</a>
+                                </li>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <li class="nav-item">
+                                    <a class="nav-link active onHover" aria-current="page" href="#">Контакт</a>
+                                </li>
+                            </div>
+                        </div>
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+                <div class="col-3">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <form asp-controller="Lawyer" asp-action="Main" method="get" class="d-flex" style="">
+                            <input class="form-control me-2" name="Title" value="" type="text" placeholder="Search by title">
+                            <input class="btn btn-outline-secondary" value="Search" type="submit" />
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - LaywerApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+
+    <script src="~/js/site.js"></script>
 </body>
 </html>

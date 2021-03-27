@@ -2,3 +2,11 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+$(window).on("scroll", function () {
+    if ($(window).scrollTop() > 50) {
+        $("#navBar").addClass("scroleBg");
+    } else {
+        $("#navBar").removeClass("scroleBg");
+    }
+});

@@ -1,0 +1,26 @@
+﻿.backgorund-green {
+    background: rgb(91,158,72);
+}
+
+.customShadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.scroleBg {
+    background-color: white;
+}
+
+.backgroundImage {
+    background-image: none;
+}
+
+@media (min-width: 992px) {
+    .backgroundImage {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8_Z_v_-NGzjY7YD8yGkVRHcwTQcJmFfBFGt_mpqzEwdGh404Ofgpmf7rrWyh7W1A3hAg&usqp=CAU");
+    }
+}
+.onHover:hover
+{
+    border: 1px solid black;
+    padding: 10px;
+}
