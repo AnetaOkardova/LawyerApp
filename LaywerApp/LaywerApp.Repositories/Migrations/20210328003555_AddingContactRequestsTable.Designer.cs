@@ -4,14 +4,16 @@ using LaywerApp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LaywerApp.Repositories.Migrations
 {
     [DbContext(typeof(LaywerAppDbContext))]
-    partial class LaywerAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210328003555_AddingContactRequestsTable")]
+    partial class AddingContactRequestsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,8 +105,9 @@ namespace LaywerApp.Repositories.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateSent")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DateSent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()

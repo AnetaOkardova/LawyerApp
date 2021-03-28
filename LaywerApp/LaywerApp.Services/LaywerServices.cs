@@ -11,13 +11,14 @@ namespace LaywerApp.Services
         private IArticlesRepository _articlesRepository { get; set; }
         private ILawServicesRepository _lawServicesRepository { get; set; }
         private ICollaboratorsRepository _collaboratorsRepository { get; set; }
+        private IContactRequestsRepository _contactRequestsRepository { get; set; }
 
-
-        public LaywerServices(IArticlesRepository articlesRepository, ILawServicesRepository lawServicesRepository, ICollaboratorsRepository collaboratorsRepository)
+        public LaywerServices(IArticlesRepository articlesRepository, ILawServicesRepository lawServicesRepository, ICollaboratorsRepository collaboratorsRepository, IContactRequestsRepository contactRequestsRepository)
         {
             _articlesRepository = articlesRepository;
             _lawServicesRepository = lawServicesRepository;
             _collaboratorsRepository = collaboratorsRepository;
+            _contactRequestsRepository = contactRequestsRepository;
         }
         public List<Article> GetArticlesByTitle(string title)
         {
@@ -30,13 +31,12 @@ namespace LaywerApp.Services
                 return _articlesRepository.GetByTitle(title);
             }
         }
-
         public Article GetArticleById(int id)
         {
 
             var selectedArticle = _articlesRepository.GetById(id);
 
-            if(selectedArticle == null)
+            if (selectedArticle == null)
             {
                 //implementiraj go ova
                 throw new ArgumentNullException();
@@ -44,7 +44,6 @@ namespace LaywerApp.Services
 
             return selectedArticle;
         }
-
         public List<LawService> GetServicesByTitle(string title)
         {
             if (title == null)
@@ -56,7 +55,6 @@ namespace LaywerApp.Services
                 return _lawServicesRepository.GetByTitle(title);
             }
         }
-
         public LawService GetLawServicesById(int id)
         {
 
@@ -70,7 +68,6 @@ namespace LaywerApp.Services
 
             return selectedService;
         }
-
         public List<Collaborator> GetCollaboratorsByName(string name)
         {
             if (name == null)
@@ -82,7 +79,6 @@ namespace LaywerApp.Services
                 return _collaboratorsRepository.GetByName(name);
             }
         }
-
         public Collaborator GetCollaboratorById(int id)
         {
             var selectedCollaborator = _collaboratorsRepository.GetById(id);
@@ -94,6 +90,10 @@ namespace LaywerApp.Services
             }
 
             return selectedCollaborator;
+        }
+        public void CreateRequest(ContactRequest contactRequest)
+        {
+            _contactRequestsRepository.Add(contactRequest);
         }
     }
 }

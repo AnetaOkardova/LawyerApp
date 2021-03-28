@@ -34,7 +34,7 @@ namespace LaywerApp
             services.AddTransient<IArticlesRepository, ArticlesRepository>();
             services.AddTransient<ILawServicesRepository, LawServicesRepository>();
             services.AddTransient<ICollaboratorsRepository, CollaboratorsRepository>();
-           
+            services.AddTransient<IContactRequestsRepository, ContactRequestsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

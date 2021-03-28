@@ -13,5 +13,6 @@ namespace LaywerApp.Services.Interfaces
         LawService GetLawServicesById(int id);
         List<Collaborator> GetCollaboratorsByName(string name);
         Collaborator GetCollaboratorById(int id);
+        void CreateRequest(ContactRequest contactRequest);
     }
 }

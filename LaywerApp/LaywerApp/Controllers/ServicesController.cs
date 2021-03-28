@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LaywerApp.Controllers
 {
-    public class ServicesController1 : Controller
+    public class ServicesController : Controller
     {
         public IActionResult Index()
         {
