@@ -38,5 +38,10 @@ namespace LaywerApp.Repositories
             _context.Articles.Remove(article);
             _context.SaveChanges();
         }
+        public void Update(Article article)
+        {
+            _context.Articles.Update(article);
+            _context.SaveChanges();
+        }
     }
 }

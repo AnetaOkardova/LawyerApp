@@ -34,10 +34,14 @@ namespace LaywerApp.Repositories
             _context.LawServices.Add(lawService);
             _context.SaveChanges();
         }
-
         public void Delete(LawService service)
         {
             _context.LawServices.Remove(service);
+            _context.SaveChanges();
+        }
+        public void Update(LawService service)
+        {
+            _context.LawServices.Update(service);
             _context.SaveChanges();
         }
     }

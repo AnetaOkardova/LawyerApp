@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace LaywerApp.Models
+namespace LaywerApp.ViewModels
 {
-    public class Article
+    public class CreateArticleModel
     {
-
-        public int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 50, MinimumLength = 3)]
         public string Title { get; set; }
@@ -15,12 +16,9 @@ namespace LaywerApp.Models
         public string ShortDescription { get; set; }
         [Required]
         public string Text { get; set; }
-        public DateTime DateCreated { get; set; }
         [Required]
         public string ImageUrl { get; set; }
         [Required]
         public string Source { get; set; }
-        public DateTime? DateUpdated { get; set; }
-
     }
 }

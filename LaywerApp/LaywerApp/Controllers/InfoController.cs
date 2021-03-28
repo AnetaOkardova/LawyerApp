@@ -30,7 +30,7 @@ namespace LaywerApp.Controllers
             if (ModelState.IsValid)
             {
                 _service.CreateRequest(contactRequest);
-                return RedirectToAction("Home", "Main");
+                return RedirectToAction("Main", "Home");
             }
             return View(contactRequest);
         }

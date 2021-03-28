@@ -1,4 +1,5 @@
-﻿using LaywerApp.Models;
+﻿using LaywerApp.Mappings;
+using LaywerApp.Models;
 using LaywerApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -33,6 +34,12 @@ namespace LaywerApp.Controllers
         public IActionResult LawService(string title)
         {
             var services = _service.GetServicesByTitle(title);
+            if(services.Count == 0)
+            {
+               ViewBag.Message = $"There is no service containing the word {title} in their title. ";
+                var nullTitle = "";
+               services = _service.GetServicesByTitle(nullTitle);
+            }
             return View(services);
         }
 
@@ -43,7 +50,7 @@ namespace LaywerApp.Controllers
             {
                 return RedirectToAction("ErrorNotFound", "Info");
             }
-            return View(article);
+            return View(article.ToArticleDetailsModel());
         }
         public IActionResult CollaboratorsDetails(int id)
         {
@@ -53,7 +60,7 @@ namespace LaywerApp.Controllers
             {
                 return RedirectToAction("ErrorNotFound", "Info");
             }
-            return View(collaborator);
+            return View(collaborator.ToCollaboratorsDetailsModel());
         }
         public IActionResult LawServiceDetails(int id)
         {
@@ -63,7 +70,7 @@ namespace LaywerApp.Controllers
             {
                 return RedirectToAction("ErrorNotFound", "Info");
             }
-            return View(service);
+            return View(service.ToLawServiceDetailsModel());
         }
 
     }

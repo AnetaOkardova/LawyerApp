@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace LaywerApp.Models
+namespace LaywerApp.ViewModels
 {
-    public class Collaborator
+    public class UpdateCollaboratorModel
     {
         public int Id { get; set; }
         [Required]
@@ -24,8 +25,5 @@ namespace LaywerApp.Models
         public string ImageUrl { get; set; }
         [Required]
         public string Email { get; set; }
-        public DateTime? DateUpdated { get; set; }
-
-
     }
 }

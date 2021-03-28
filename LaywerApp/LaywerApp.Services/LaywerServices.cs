@@ -5,6 +5,7 @@ using LaywerApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 
+
 namespace LaywerApp.Services
 {
     public class LaywerServices : ILaywerServices
@@ -20,8 +21,8 @@ namespace LaywerApp.Services
             _collaboratorsRepository = collaboratorsRepository;
             _contactRequestsRepository = contactRequestsRepository;
         }
-        
-        
+
+
         public List<Article> GetArticlesByTitle(string title)
         {
             if (title == null)
@@ -58,16 +59,44 @@ namespace LaywerApp.Services
             if (article == null)
             {
                 response.Success = false;
-                response.Message = $"The article with ID {id} is not found.";
+                response.Message = $"The item with ID {id} is not found.";
             }
             else
             {
                 response.Success = true;
+                response.Message = $"The item with ID {id} has been successfully deleted.";
+
                 _articlesRepository.Delete(article);
             }
             return response;
         }
+        public StatusModel UpdateArticle(Article article)
+        {
+            var response = new StatusModel();
+            var articleToUpdate = _articlesRepository.GetById(article.Id);
 
+
+            if (articleToUpdate == null)
+            {
+                response.Success = false;
+                response.Message = $"The item with ID {article.Id} is not found.";
+            }
+            else
+            {
+                articleToUpdate.Title = article.Title;
+                articleToUpdate.ImageUrl = article.ImageUrl;
+                articleToUpdate.ShortDescription = article.ShortDescription;
+                articleToUpdate.Source = article.Source;
+                articleToUpdate.Text = article.Text;
+                articleToUpdate.DateUpdated = DateTime.Now;
+
+                _articlesRepository.Update(articleToUpdate);
+
+                response.Success = true;
+                response.Message = $"The item with ID {article.Id} has been successfully updated.";
+            }
+            return response;
+        }
 
         public List<LawService> GetServicesByTitle(string title)
         {
@@ -105,16 +134,42 @@ namespace LaywerApp.Services
             if (service == null)
             {
                 response.Success = false;
-                response.Message = $"The service with ID {id} is not found.";
+                response.Message = $"The item with ID {id} is not found.";
             }
             else
             {
                 response.Success = true;
+                response.Message = $"The item with ID {id} has been successfully deleted.";
+
                 _lawServicesRepository.Delete(service);
             }
             return response;
         }
+        public StatusModel UpdateLawService(LawService service)
+        {
+            var response = new StatusModel();
+            var serviceToUpdate = _lawServicesRepository.GetById(service.Id);
 
+
+            if (serviceToUpdate == null)
+            {
+                response.Success = false;
+                response.Message = $"The item with ID {service.Id} is not found.";
+            }
+            else
+            {
+                serviceToUpdate.Title = service.Title;
+                serviceToUpdate.ImageUrl = service.ImageUrl;
+                serviceToUpdate.Text = service.Text;
+                serviceToUpdate.DateUpdated = DateTime.Now;
+
+                _lawServicesRepository.Update(serviceToUpdate);
+
+                response.Success = true;
+                response.Message = $"The item with ID {service.Id} has been successfully updated.";
+            }
+            return response;
+        }
 
         public List<Collaborator> GetCollaboratorsByName(string name)
         {
@@ -151,23 +206,49 @@ namespace LaywerApp.Services
             if (collaborator == null)
             {
                 response.Success = false;
-                response.Message = $"The collaborator with ID {id} is not found.";
+                response.Message = $"The item with ID {id} is not found.";
             }
             else
             {
                 response.Success = true;
+                response.Message = $"The item with ID {id} has been successfully deleted.";
+
                 _collaboratorsRepository.Delete(collaborator);
             }
             return response;
         }
+        public StatusModel UpdateCollaborator(Collaborator collaborator)
+        {
+            var response = new StatusModel();
+            var collaboratorToUpdate = _collaboratorsRepository.GetById(collaborator.Id);
 
+
+            if (collaboratorToUpdate == null)
+            {
+                response.Success = false;
+                response.Message = $"The item with ID {collaborator.Id} is not found.";
+            }
+            else
+            {
+                collaboratorToUpdate.Name = collaborator.Name;
+                collaboratorToUpdate.ImageUrl = collaborator.ImageUrl;
+                collaboratorToUpdate.LastName = collaborator.LastName;
+                collaboratorToUpdate.Email = collaborator.Email;
+                collaboratorToUpdate.About = collaborator.About;
+                collaboratorToUpdate.Status = collaborator.Status;
+                collaboratorToUpdate.DateUpdated = DateTime.Now;
+
+                _collaboratorsRepository.Update(collaboratorToUpdate);
+
+                response.Success = true;
+                response.Message = $"The item with ID {collaborator.Id} has been successfully updated.";
+            }
+            return response;
+        }
 
         public void CreateRequest(ContactRequest contactRequest)
         {
             _contactRequestsRepository.Add(contactRequest);
         }
-
-
-
     }
 }

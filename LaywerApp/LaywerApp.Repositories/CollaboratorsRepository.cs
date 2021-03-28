@@ -39,5 +39,10 @@ namespace LaywerApp.Repositories
             _context.Collaborators.Remove(collaborator);
             _context.SaveChanges();
         }
+        public void Update(Collaborator collaborator)
+        {
+            _context.Collaborators.Update(collaborator);
+            _context.SaveChanges();
+        }
     }
 }

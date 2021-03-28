@@ -1,5 +1,7 @@
-﻿using LaywerApp.Models;
+﻿using LaywerApp.Mappings;
+using LaywerApp.Models;
 using LaywerApp.Services.Interfaces;
+using LaywerApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,8 +17,8 @@ namespace LaywerApp.Controllers
         {
             _service = service;
         }
-        
-        public IActionResult EditOverview(string title, string name, string serviceTitle)
+
+        public IActionResult EditOverview(string title, string name, string serviceTitle, string successMessage, string errorMessage)
         {
             var articles = _service.GetArticlesByTitle(title);
             var collaborators = _service.GetCollaboratorsByName(name);
@@ -25,8 +27,15 @@ namespace LaywerApp.Controllers
             articlesAndCollaborators.Articles = articles;
             articlesAndCollaborators.Collaborators = collaborators;
             articlesAndCollaborators.LawServices = lawServices;
+
+            ViewBag.SuccessMessage = successMessage;
+            ViewBag.ErrorMessage = errorMessage;
+
+
             return View(articlesAndCollaborators);
         }
+
+
 
         [HttpGet]
         public IActionResult CreateArticle()
@@ -34,11 +43,12 @@ namespace LaywerApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateArticle(Article article)
+        public IActionResult CreateArticle(CreateArticleModel article)
         {
+            var domainModel = article.ToModel();
             if (ModelState.IsValid)
             {
-                _service.CreateArticle(article);
+                _service.CreateArticle(domainModel);
                 return RedirectToAction("Main", "Home");
             }
             return View(article);
@@ -48,26 +58,58 @@ namespace LaywerApp.Controllers
             var response = _service.DeleteArticle(id);
             if (response.Success)
             {
-                return RedirectToAction("EditOverview");
+                return RedirectToAction( "EditOverview", new { SuccessMessage = response.Message });
             }
             else
             {
-                //implement success message
-                return RedirectToAction("ErrorNotFound", "Info");
+                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
             }
         }
-        
+        [HttpGet]
+        public IActionResult UpdateArticle(int id)
+        {
+            var article = _service.GetArticleById(id);
+
+            return View(article.ToUpdateArticleModel());
+        }
+        [HttpPost]
+        public IActionResult UpdateArticle(UpdateArticleModel article)
+        {
+            var domainModel = article.ToModel();
+
+            if (ModelState.IsValid)
+            {
+                var response = _service.UpdateArticle(domainModel);
+                if (response.Success)
+                {
+                    return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
+                }
+                else
+                {
+                    return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
+                }
+            }
+            else
+            {
+                return View(article);
+            }
+        }
+
+
+
         [HttpGet]
         public IActionResult CreateCollaborator()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult CreateCollaborator(Collaborator collaborator)
+        public IActionResult CreateCollaborator(CreateCollaboratorModel collaborator)
         {
+            var domainModel = collaborator.ToModel();
+
             if (ModelState.IsValid)
             {
-                _service.CreateCollaborator(collaborator);
+                _service.CreateCollaborator(domainModel);
                 return RedirectToAction("Main", "Home");
             }
             return View(collaborator);
@@ -77,14 +119,43 @@ namespace LaywerApp.Controllers
             var response = _service.DeleteCollaborator(id);
             if (response.Success)
             {
-                return RedirectToAction("EditOverview");
+                return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
             }
             else
             {
-                //implement success message
-                return RedirectToAction("ErrorNotFound", "Info");
+                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
             }
         }
+        [HttpGet]
+        public IActionResult UpdateCollaborator(int id)
+        {
+            var collaborator = _service.GetCollaboratorById(id);
+            return View(collaborator.ToUpdateCollaboratorModel());
+        }
+        [HttpPost]
+        public IActionResult UpdateCollaborator(UpdateCollaboratorModel collaborator)
+        {
+            var domainModel = collaborator.ToModel();
+
+            if (ModelState.IsValid)
+            {
+                var response = _service.UpdateCollaborator(domainModel);
+                if (response.Success)
+                {
+                    return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
+                }
+                else
+                {
+                    return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
+                }
+            }
+            else
+            {
+                return View(collaborator);
+            }
+        }
+
+
 
         [HttpGet]
         public IActionResult CreateLawService()
@@ -92,11 +163,13 @@ namespace LaywerApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateLawService(LawService lawService)
+        public IActionResult CreateLawService(CreateLawServiceModel lawService)
         {
+            var domainModel = lawService.ToModel();
+
             if (ModelState.IsValid)
             {
-                _service.CreateLawService(lawService);
+                _service.CreateLawService(domainModel);
                 return RedirectToAction("Main", "Home");
             }
             return View(lawService);
@@ -106,14 +179,41 @@ namespace LaywerApp.Controllers
             var response = _service.DeleteLawService(id);
             if (response.Success)
             {
-                return RedirectToAction("EditOverview");
+                return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
             }
             else
             {
-                //implement success message
-                return RedirectToAction("ErrorNotFound", "Info");
+                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
             }
         }
+        [HttpGet]
+        public IActionResult UpdateLawService(int id)
+        {
+            var service = _service.GetLawServicesById(id);
+            return View(service.ToUpdateLawServiceModel());
+        }
+        [HttpPost]
+        public IActionResult UpdateLawService(UpdateLawServiceModel service)
+        {
+            var domainModel = service.ToModel();
 
+            if (ModelState.IsValid)
+            {
+                var response = _service.UpdateLawService(domainModel);
+                if (response.Success)
+                {
+                    return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
+                }
+                else
+                {
+                    return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
+                }
+            }
+            else
+            {
+                return View(service);
+            }
+        }
+        
     }
 }

@@ -16,6 +16,7 @@ namespace LaywerApp.Services.Interfaces
         List<LawService> GetServicesByTitle(string title);
         LawService GetLawServicesById(int id);
         void CreateLawService(LawService lawService);
+        StatusModel DeleteLawService(int id);
 
         List<Collaborator> GetCollaboratorsByName(string name);
         Collaborator GetCollaboratorById(int id);
@@ -24,6 +25,9 @@ namespace LaywerApp.Services.Interfaces
 
 
         void CreateRequest(ContactRequest contactRequest);
-        StatusModel DeleteLawService(int id);
+
+        StatusModel UpdateArticle(Article article);
+        StatusModel UpdateLawService(LawService service);
+        StatusModel UpdateCollaborator(Collaborator collaborator);
     }
 }

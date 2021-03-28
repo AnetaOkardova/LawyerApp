@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace LaywerApp.Models
+namespace LaywerApp.ViewModels
 {
-    public class LawService
+    public class CreateLawServiceModel
     {
-        public int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 50, MinimumLength = 3)]
         public string Title { get; set; }
         [Required]
         public string Text { get; set; }
-        public DateTime DateCreated { get; set; }
         [Required]
         public string ImageUrl { get; set; }
-        public DateTime? DateUpdated { get; set; }
     }
 }

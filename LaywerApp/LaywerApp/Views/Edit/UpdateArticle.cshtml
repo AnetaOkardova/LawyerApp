@@ -1,15 +1,15 @@
 ﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 
-@model LaywerApp.ViewModels.CreateArticleModel
+@model LaywerApp.ViewModels.UpdateArticleModel
 
 @{
-    ViewBag.Title = "Create article";
+    ViewBag.Title = "Edit article";
 }
 
 <div class="container mt-5">
     <div class="row">
         <div class="col offset-1 m-3 p-3">
-            <form asp-controller="Edit" asp-action="CreateArticle" method="post" style="width: 90%">
+            <form asp-controller="Edit" asp-action="UpdateArticle" asp-route-id="@Model.Id" method="post" style="width: 90%">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label class="control-label" asp-for="Title">Наслов</label>
@@ -37,7 +37,7 @@
                     <span asp-validation-for="Source" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-secondary" />
+                    <input type="submit" value="Save" class="btn btn-secondary" />
                 </div>
             </form>
         </div>

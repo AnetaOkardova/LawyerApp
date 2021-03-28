@@ -6,35 +6,55 @@
     ViewBag.Title = "Edit overview";
 }
 
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success m-3" role="alert" style="width:800px">
+        @ViewBag.SuccessMessage
+    </div>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-success m-3" role="alert" style="width:800px">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col m-5 p-5">
+        <div class="col m-1 p-5">
             <p>
                 <a href="/Edit/CreateArticle" class="btn btn-success">Create article</a>
             </p>
-
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Title</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var article in Model.Articles)
-                    {
+            @if (Model.Articles.Count == 0)
+            {
+                <p>The are no articles to show.</p>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
                         <tr>
-                            <td>@article.Id</td>
-                            <td>@article.Title</td>
-                            <td class="text-center">
-                                <a href="/Edit/UpdateArticle/@article.Id" class="text-primary">Modify</a> |
-                                <a href="/Edit/DeleteArticle/@article.Id" class="text-danger">Delete</a>
-                            </td>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var article in Model.Articles)
+                        {
+                            <tr>
+                                <td>@article.Id</td>
+                                <td>@article.Title</td>
+                                <td class="text-center">
+                                    <a href="/Edit/UpdateArticle/@article.Id" class="text-primary">Modify</a> |
+                                    <a href="/Edit/DeleteArticle/@article.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
 </div>
@@ -45,58 +65,74 @@
             <p>
                 <a href="/Edit/CreateCollaborator" class="btn btn-success">Create collaborator</a>
             </p>
-
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var collaborator in Model.Collaborators)
-                    {
+            @if (Model.Collaborators.Count == 0)
+            {
+                <p>The are no collaborators to show.</p>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
                         <tr>
-                            <td>@collaborator.Id</td>
-                            <td>@collaborator.Name @collaborator.LastName </td>
-                            <td class="text-center">
-                                <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
-                                <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger">Delete</a>
-                            </td>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var collaborator in Model.Collaborators)
+                        {
+                            <tr>
+                                <td>@collaborator.Id</td>
+                                <td>@collaborator.Name @collaborator.LastName </td>
+                                <td class="text-center">
+                                    <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
+                                    <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
 </div>
-        <div class="container">
-<div class="row justify-content-center">
-    <div class="col m-5 p-5">
-        <p>
-            <a href="/Edit/CreateLawService" class="btn btn-success">Create service</a>
-        </p>
-
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var service in Model.LawServices)
-                {
-                    <tr>
-                        <td>@service.Id</td>
-                        <td>@service.Title</td>
-                        <td class="text-center">
-                            <a href="/Edit/UpdateLawService/@service.Id" class="text-primary">Modify</a> |
-                            <a href="/Edit/DeleteLawService/@service.Id" class="text-danger">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col m-5 p-5">
+            <p>
+                <a href="/Edit/CreateLawService" class="btn btn-success">Create service</a>
+            </p>
+            @if (Model.LawServices.Count == 0)
+            {
+                <p>The are no services to show.</p>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var service in Model.LawServices)
+                        {
+                            <tr>
+                                <td>@service.Id</td>
+                                <td>@service.Title</td>
+                                <td class="text-center">
+                                    <a href="/Edit/UpdateLawService/@service.Id" class="text-primary">Modify</a> |
+                                    <a href="/Edit/DeleteLawService/@service.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

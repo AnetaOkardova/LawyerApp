@@ -20,6 +20,12 @@
     </div>
 </div>
 
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success m-3" role="alert" style="width:800px">
+        @ViewBag.Message
+    </div>
+}
 
 <div class="row p-3">
     @foreach (var service in Model)
@@ -35,3 +41,4 @@
         </div>
     }
 </div>
+
