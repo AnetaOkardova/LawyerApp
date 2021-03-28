@@ -14,21 +14,19 @@ namespace LaywerApp.Repositories
         {
             _context = context;
         }
+
         public List<ContactRequest> GetAll()
         {
             return _context.ContactRequests.ToList();
         }
-
         public ContactRequest GetById(int id)
         {
             return _context.ContactRequests.FirstOrDefault(x => x.Id == id);
         }
-
         public List<ContactRequest> GetByName(string name)
         {
             return _context.ContactRequests.Where(x => x.Name.Contains(name)).ToList();
         }
-
         public void Add(ContactRequest contactRequest)
         {
             contactRequest.DateSent = DateTime.Now;

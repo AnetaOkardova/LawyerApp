@@ -10,5 +10,6 @@ namespace LaywerApp.Repositories.Interfaces
         List<Collaborator> GetByName(string name);
         List<Collaborator> GetAll();
         Collaborator GetById(int id);
+        void Add(Collaborator collaborator);
     }
 }

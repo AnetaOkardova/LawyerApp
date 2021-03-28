@@ -18,15 +18,19 @@ namespace LaywerApp.Repositories
         {
             return _context.Articles.Where(x => x.Title.Contains(title)).ToList();
         }
-
         public List<Article> GetAll()
         {
             return _context.Articles.ToList();
         }
-
         public Article GetById(int id)
         {
             return _context.Articles.FirstOrDefault(x => x.Id == id);
+        }
+        public void Add(Article article)
+        {
+            article.DateCreated = DateTime.Now;
+            _context.Articles.Add(article);
+            _context.SaveChanges();
         }
     }
 }

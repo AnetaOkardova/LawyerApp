@@ -10,5 +10,6 @@ namespace LaywerApp.Repositories.Interfaces
         List<Article> GetByTitle(string title);
         List<Article> GetAll();
         Article GetById(int id);
+        void Add(Article article);
     }
 }

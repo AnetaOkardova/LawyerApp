@@ -14,5 +14,8 @@ namespace LaywerApp.Services.Interfaces
         List<Collaborator> GetCollaboratorsByName(string name);
         Collaborator GetCollaboratorById(int id);
         void CreateRequest(ContactRequest contactRequest);
+        void CreateArticle(Article article);
+        void CreateCollaborator(Collaborator collaborator);
+        void CreateLawService(LawService lawService);
     }
 }

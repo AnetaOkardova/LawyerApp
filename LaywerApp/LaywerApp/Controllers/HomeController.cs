@@ -17,15 +17,25 @@ namespace LaywerApp.Controllers
         {
             _service = service;
         }
-        public IActionResult Main(string title, string name)
+
+        public IActionResult Main(string title, string name, string serviceTitle)
         {
             var articles = _service.GetArticlesByTitle(title);
             var collaborators = _service.GetCollaboratorsByName(name);
-            var articlesAndCollaborators = new ArticlesAndCollaborators();
+            var lawServices = _service.GetServicesByTitle(serviceTitle);
+
+            var articlesAndCollaborators = new ArticlesCollaboratorsLawServices();
             articlesAndCollaborators.Articles = articles;
             articlesAndCollaborators.Collaborators = collaborators;
+            articlesAndCollaborators.LawServices = lawServices;
             return View(articlesAndCollaborators);
         }
+        public IActionResult LawService(string title)
+        {
+            var services = _service.GetServicesByTitle(title);
+            return View(services);
+        }
+
         public IActionResult ArticleDetails(int id)
         {
             var article = _service.GetArticleById(id);
@@ -35,11 +45,15 @@ namespace LaywerApp.Controllers
             }
             return View(article);
         }
-
-        public IActionResult LawService(string title)
+        public IActionResult CollaboratorsDetails(int id)
         {
-            var services = _service.GetServicesByTitle(title);
-            return View(services);
+            var collaborator = _service.GetCollaboratorById(id);
+
+            if (collaborator == null)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+            return View(collaborator);
         }
         public IActionResult LawServiceDetails(int id)
         {
@@ -52,15 +66,5 @@ namespace LaywerApp.Controllers
             return View(service);
         }
 
-        public IActionResult CollaboratorsDetails(int id)
-        {
-            var collaborator = _service.GetCollaboratorById(id);
-
-            if (collaborator == null)
-            {
-                return RedirectToAction("ErrorNotFound", "Info");
-            }
-            return View(collaborator);
-        }
     }
 }

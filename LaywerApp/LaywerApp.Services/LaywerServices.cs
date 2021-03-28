@@ -12,7 +12,6 @@ namespace LaywerApp.Services
         private ILawServicesRepository _lawServicesRepository { get; set; }
         private ICollaboratorsRepository _collaboratorsRepository { get; set; }
         private IContactRequestsRepository _contactRequestsRepository { get; set; }
-
         public LaywerServices(IArticlesRepository articlesRepository, ILawServicesRepository lawServicesRepository, ICollaboratorsRepository collaboratorsRepository, IContactRequestsRepository contactRequestsRepository)
         {
             _articlesRepository = articlesRepository;
@@ -20,6 +19,8 @@ namespace LaywerApp.Services
             _collaboratorsRepository = collaboratorsRepository;
             _contactRequestsRepository = contactRequestsRepository;
         }
+        
+        
         public List<Article> GetArticlesByTitle(string title)
         {
             if (title == null)
@@ -44,6 +45,11 @@ namespace LaywerApp.Services
 
             return selectedArticle;
         }
+        public void CreateArticle(Article article)
+        {
+            _articlesRepository.Add(article);
+        }
+
         public List<LawService> GetServicesByTitle(string title)
         {
             if (title == null)
@@ -68,6 +74,11 @@ namespace LaywerApp.Services
 
             return selectedService;
         }
+        public void CreateLawService(LawService lawService)
+        {
+            _lawServicesRepository.Add(lawService);
+        }
+
         public List<Collaborator> GetCollaboratorsByName(string name)
         {
             if (name == null)
@@ -91,9 +102,16 @@ namespace LaywerApp.Services
 
             return selectedCollaborator;
         }
+        public void CreateCollaborator(Collaborator collaborator)
+        {
+            _collaboratorsRepository.Add(collaborator);
+        }
+
         public void CreateRequest(ContactRequest contactRequest)
         {
             _contactRequestsRepository.Add(contactRequest);
         }
+
+        
     }
 }

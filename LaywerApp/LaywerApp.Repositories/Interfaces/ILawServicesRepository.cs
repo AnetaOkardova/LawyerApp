@@ -10,5 +10,6 @@ namespace LaywerApp.Repositories.Interfaces
         List<LawService> GetByTitle(string title);
         List<LawService> GetAll();
         LawService GetById(int id);
+        void Add(LawService lawService);
     }
 }

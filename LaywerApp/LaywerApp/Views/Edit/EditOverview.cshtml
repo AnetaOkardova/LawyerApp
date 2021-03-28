@@ -1,0 +1,102 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model LaywerApp.Models.ArticlesCollaboratorsLawServices
+
+@{
+    ViewBag.Title = "Edit overview";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col m-5 p-5">
+            <p>
+                <a href="/Edit/CreateArticle" class="btn btn-success">Create article</a>
+            </p>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var article in Model.Articles)
+                    {
+                        <tr>
+                            <td>@article.Id</td>
+                            <td>@article.Title</td>
+                            <td class="text-center">
+                                <a href="/Edit/UpdateArticle/@article.Id" class="text-primary">Modify</a> |
+                                <a href="/Edit/DeleteArticle/@article.Id" class="text-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col m-5 p-5">
+            <p>
+                <a href="/Edit/CreateCollaborator" class="btn btn-success">Create collaborator</a>
+            </p>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var collaborator in Model.Collaborators)
+                    {
+                        <tr>
+                            <td>@collaborator.Id</td>
+                            <td>@collaborator.Name @collaborator.LastName </td>
+                            <td class="text-center">
+                                <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
+                                <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+        <div class="container">
+<div class="row justify-content-center">
+    <div class="col m-5 p-5">
+        <p>
+            <a href="/Edit/CreateLawService" class="btn btn-success">Create service</a>
+        </p>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model.LawServices)
+                {
+                    <tr>
+                        <td>@service.Id</td>
+                        <td>@service.Title</td>
+                        <td class="text-center">
+                            <a href="/Edit/UpdateLawService/@service.Id" class="text-primary">Modify</a> |
+                            <a href="/Edit/DeleteLawService/@service.Id" class="text-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>

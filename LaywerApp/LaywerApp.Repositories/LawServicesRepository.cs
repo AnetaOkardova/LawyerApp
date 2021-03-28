@@ -14,19 +14,24 @@ namespace LaywerApp.Repositories
         {
             _context = context;
         }
+
         public List<LawService> GetAll()
         {
             return _context.LawServices.ToList();
         }
-
         public LawService GetById(int id)
         {
             return _context.LawServices.FirstOrDefault(x => x.Id == id);
         }
-
         public List<LawService> GetByTitle(string title)
         {
             return _context.LawServices.Where(x => x.Title.Contains(title)).ToList();
+        }
+        public void Add(LawService lawService)
+        {
+            lawService.DateCreated = DateTime.Now;
+            _context.LawServices.Add(lawService);
+            _context.SaveChanges();
         }
     }
 }
