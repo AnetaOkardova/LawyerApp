@@ -28,9 +28,15 @@ namespace LaywerApp.Repositories
         {
             return _context.Collaborators.Where(x => x.Name.Contains(name)).ToList();
         }
+
         public void Add(Collaborator collaborator)
         {
             _context.Collaborators.Add(collaborator);
+            _context.SaveChanges();
+        }
+        public void Delete(Collaborator collaborator)
+        {
+            _context.Collaborators.Remove(collaborator);
             _context.SaveChanges();
         }
     }

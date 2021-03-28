@@ -43,7 +43,20 @@ namespace LaywerApp.Controllers
             }
             return View(article);
         }
-
+        public IActionResult DeleteArticle(int id)
+        {
+            var response = _service.DeleteArticle(id);
+            if (response.Success)
+            {
+                return RedirectToAction("EditOverview");
+            }
+            else
+            {
+                //implement success message
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+        }
+        
         [HttpGet]
         public IActionResult CreateCollaborator()
         {
@@ -58,6 +71,19 @@ namespace LaywerApp.Controllers
                 return RedirectToAction("Main", "Home");
             }
             return View(collaborator);
+        }
+        public IActionResult DeleteCollaborator(int id)
+        {
+            var response = _service.DeleteCollaborator(id);
+            if (response.Success)
+            {
+                return RedirectToAction("EditOverview");
+            }
+            else
+            {
+                //implement success message
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
         }
 
         [HttpGet]
@@ -75,6 +101,19 @@ namespace LaywerApp.Controllers
             }
             return View(lawService);
         }
-        
+        public IActionResult DeleteLawService(int id)
+        {
+            var response = _service.DeleteLawService(id);
+            if (response.Success)
+            {
+                return RedirectToAction("EditOverview");
+            }
+            else
+            {
+                //implement success message
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+        }
+
     }
 }

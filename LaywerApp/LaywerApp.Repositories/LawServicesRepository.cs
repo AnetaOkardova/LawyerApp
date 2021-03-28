@@ -27,10 +27,17 @@ namespace LaywerApp.Repositories
         {
             return _context.LawServices.Where(x => x.Title.Contains(title)).ToList();
         }
+
         public void Add(LawService lawService)
         {
             lawService.DateCreated = DateTime.Now;
             _context.LawServices.Add(lawService);
+            _context.SaveChanges();
+        }
+
+        public void Delete(LawService service)
+        {
+            _context.LawServices.Remove(service);
             _context.SaveChanges();
         }
     }

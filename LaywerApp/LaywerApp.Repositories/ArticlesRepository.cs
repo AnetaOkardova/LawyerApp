@@ -26,10 +26,16 @@ namespace LaywerApp.Repositories
         {
             return _context.Articles.FirstOrDefault(x => x.Id == id);
         }
+
         public void Add(Article article)
         {
             article.DateCreated = DateTime.Now;
             _context.Articles.Add(article);
+            _context.SaveChanges();
+        }
+        public void Delete(Article article)
+        {
+            _context.Articles.Remove(article);
             _context.SaveChanges();
         }
     }

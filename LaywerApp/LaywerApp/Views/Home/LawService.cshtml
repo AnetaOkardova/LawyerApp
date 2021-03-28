@@ -7,7 +7,21 @@
     ViewBag.Title = "Services";
 }
 
-<div class="row p-5">
+<div class="container">
+    <div class="row">
+        <div class="col offset-9 mr-3 p-4">
+            <div>
+                <form asp-controller="Home" asp-action="LawService" method="get" class="d-flex" style="">
+                    <input class="form-control me-2" name="Title" value="" type="text" placeholder="Search by title">
+                    <input class="btn btn-outline-secondary" value="Search" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row p-3">
     @foreach (var service in Model)
     {
         <div class="col-md-3 p-1">

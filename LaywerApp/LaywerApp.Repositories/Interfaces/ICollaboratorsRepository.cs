@@ -11,5 +11,6 @@ namespace LaywerApp.Repositories.Interfaces
         List<Collaborator> GetAll();
         Collaborator GetById(int id);
         void Add(Collaborator collaborator);
+        void Delete(Collaborator collaborator);
     }
 }
