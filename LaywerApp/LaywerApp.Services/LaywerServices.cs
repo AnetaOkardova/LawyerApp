@@ -1,4 +1,5 @@
-﻿using LaywerApp.Models;
+﻿using LaywerApp.Common;
+using LaywerApp.Models;
 using LaywerApp.Repositories.Interfaces;
 using LaywerApp.Services.DtoModels;
 using LaywerApp.Services.Interfaces;
@@ -41,8 +42,7 @@ namespace LaywerApp.Services
 
             if (selectedArticle == null)
             {
-                //implementiraj go ova
-                throw new ArgumentNullException();
+                throw new LaywerAppException($"There is no article with Id {id}.");
             }
 
             return selectedArticle;
@@ -116,8 +116,7 @@ namespace LaywerApp.Services
 
             if (selectedService == null)
             {
-                //implementiraj go ova
-                throw new ArgumentNullException();
+                throw new LaywerAppException($"There is no service with Id {id}.");
             }
 
             return selectedService;
@@ -188,8 +187,7 @@ namespace LaywerApp.Services
 
             if (selectedCollaborator == null)
             {
-                //implementiraj go ova
-                throw new ArgumentNullException();
+                throw new LaywerAppException($"There is no collaborator with Id {id}.");
             }
 
             return selectedCollaborator;

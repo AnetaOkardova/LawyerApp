@@ -25,7 +25,5 @@ namespace LaywerApp.Models
         [Required]
         public string Email { get; set; }
         public DateTime? DateUpdated { get; set; }
-
-
     }
 }

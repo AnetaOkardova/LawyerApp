@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LaywerApp.Common\LaywerApp.Common.csproj" />
     <ProjectReference Include="..\LaywerApp.Repositories\LaywerApp.Repositories.csproj" />
   </ItemGroup>
 

@@ -9,7 +9,7 @@ namespace LaywerApp.Mappings
 {
     public static class DomainModelExtensions
     {
-       public static UpdateArticleModel ToUpdateArticleModel(this Article article)
+        public static UpdateArticleModel ToUpdateArticleModel(this Article article)
         {
             return new UpdateArticleModel()
             {
@@ -34,8 +34,7 @@ namespace LaywerApp.Mappings
                 Status = collaborator.Status
             };
         }
-        
-             public static UpdateLawServiceModel ToUpdateLawServiceModel(this LawService service)
+        public static UpdateLawServiceModel ToUpdateLawServiceModel(this LawService service)
         {
             return new UpdateLawServiceModel()
             {
@@ -76,6 +75,38 @@ namespace LaywerApp.Mappings
                 Text = service.Text,
                 DateCreated = service.DateCreated,
                 ImageUrl = service.ImageUrl,
+            };
+        }
+
+        public static LawServiceCardModel ToLawServiceCardModel(this LawService service)
+        {
+            return new LawServiceCardModel()
+            {
+                Id= service.Id,
+                Title = service.Title,
+                ImageUrl = service.ImageUrl,
+            };
+        }
+        public static CollaboratorCardModel ToCollaboratorCardModel(this Collaborator collaborator)
+        {
+            return new CollaboratorCardModel()
+            {
+                Id = collaborator.Id,
+                Name = collaborator.Name,
+                LastName = collaborator.LastName,
+                Status = collaborator.Status,
+                ImageUrl = collaborator.ImageUrl,
+                About = collaborator.About
+            };
+        }
+        public static ArticleCardModel ToArticleCardModel(this Article article)
+        {
+            return new ArticleCardModel()
+            {
+                Id = article.Id,
+                Title = article.Title,
+                ShortDescription = article.ShortDescription,
+                ImageUrl = article.ImageUrl,
             };
         }
     }

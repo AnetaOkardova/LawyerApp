@@ -5,7 +5,6 @@ namespace LaywerApp.Models
 {
     public class Article
     {
-
         public int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 50, MinimumLength = 3)]
@@ -21,6 +20,5 @@ namespace LaywerApp.Models
         [Required]
         public string Source { get; set; }
         public DateTime? DateUpdated { get; set; }
-
     }
 }

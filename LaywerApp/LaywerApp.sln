@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaywerApp", "LaywerApp\LaywerApp.csproj", "{63156CEE-C906-455B-970C-5715D8DE46CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaywerApp", "LaywerApp\LaywerApp.csproj", "{63156CEE-C906-455B-970C-5715D8DE46CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaywerApp.Models", "LaywerApp.Models\LaywerApp.Models.csproj", "{A3BE52CA-95BF-4937-B8A3-151A75A5498B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaywerApp.Models", "LaywerApp.Models\LaywerApp.Models.csproj", "{A3BE52CA-95BF-4937-B8A3-151A75A5498B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaywerApp.Services", "LaywerApp.Services\LaywerApp.Services.csproj", "{E616D78D-3160-4E39-A839-CF29307AAB03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaywerApp.Services", "LaywerApp.Services\LaywerApp.Services.csproj", "{E616D78D-3160-4E39-A839-CF29307AAB03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaywerApp.Repositories", "LaywerApp.Repositories\LaywerApp.Repositories.csproj", "{B0F343BD-DFE3-4293-AB4F-6C3B81D98FE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaywerApp.Repositories", "LaywerApp.Repositories\LaywerApp.Repositories.csproj", "{B0F343BD-DFE3-4293-AB4F-6C3B81D98FE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaywerApp.Common", "LaywerApp.Common\LaywerApp.Common.csproj", "{CF850A10-381A-4055-9AD6-B58C83326E4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B0F343BD-DFE3-4293-AB4F-6C3B81D98FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0F343BD-DFE3-4293-AB4F-6C3B81D98FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0F343BD-DFE3-4293-AB4F-6C3B81D98FE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF850A10-381A-4055-9AD6-B58C83326E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF850A10-381A-4055-9AD6-B58C83326E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF850A10-381A-4055-9AD6-B58C83326E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF850A10-381A-4055-9AD6-B58C83326E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,7 @@
-﻿using LaywerApp.Models;
+﻿using LaywerApp.Mappings;
+using LaywerApp.Models;
 using LaywerApp.Services.Interfaces;
+using LaywerApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,14 +27,20 @@ namespace LaywerApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ContactUs(ContactRequest contactRequest)
+        public IActionResult ContactUs(ContactRequestModel contactRequest)
         {
             if (ModelState.IsValid)
             {
-                _service.CreateRequest(contactRequest);
+                _service.CreateRequest(contactRequest.ToModel());
                 return RedirectToAction("Main", "Home");
             }
             return View(contactRequest);
         }
+        public IActionResult ActionNotSuccessful(string message)
+        {
+            ViewBag.Message = message;
+            return View();
+        }
+        
     }
 }

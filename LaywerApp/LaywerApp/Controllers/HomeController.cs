@@ -1,6 +1,7 @@
 ﻿using LaywerApp.Mappings;
 using LaywerApp.Models;
 using LaywerApp.Services.Interfaces;
+using LaywerApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,25 +23,51 @@ namespace LaywerApp.Controllers
         public IActionResult Main(string title, string name, string serviceTitle)
         {
             var articles = _service.GetArticlesByTitle(title);
+            var newArticles = new List<ArticleCardModel>();
+            foreach (var article in articles)
+            {
+                var newArticle = article.ToArticleCardModel();
+                newArticles.Add(newArticle);
+            }
             var collaborators = _service.GetCollaboratorsByName(name);
+            var newCollaborators = new List<CollaboratorCardModel>();
+            foreach (var collaborator in collaborators)
+            {
+                var newCollaborator = collaborator.ToCollaboratorCardModel();
+                newCollaborators.Add(newCollaborator);
+            }
             var lawServices = _service.GetServicesByTitle(serviceTitle);
+            var newServices = new List<LawServiceCardModel>();
+            foreach (var service in lawServices)
+            {
+                var newService = service.ToLawServiceCardModel();
+                newServices.Add(newService);
+            }
 
-            var articlesAndCollaborators = new ArticlesCollaboratorsLawServices();
-            articlesAndCollaborators.Articles = articles;
-            articlesAndCollaborators.Collaborators = collaborators;
-            articlesAndCollaborators.LawServices = lawServices;
-            return View(articlesAndCollaborators);
+            var overviewModel = new OverviewModel();
+            overviewModel.Articles = newArticles;
+            overviewModel.Collaborators = newCollaborators;
+            overviewModel.LawServices = newServices;
+            return View(overviewModel);
         }
-        public IActionResult LawService(string title)
+        public IActionResult LawServiceOverview(string title)
         {
             var services = _service.GetServicesByTitle(title);
-            if(services.Count == 0)
+            
+            if (services.Count == 0)
             {
                ViewBag.Message = $"There is no service containing the word {title} in their title. ";
                 var nullTitle = "";
                services = _service.GetServicesByTitle(nullTitle);
             }
-            return View(services);
+
+            var servicesOverview = new List<LawServiceCardModel>();
+            foreach (var service in services)
+            {
+                var modelService = service.ToLawServiceCardModel();
+                servicesOverview.Add(modelService);
+            }
+            return View(servicesOverview);
         }
 
         public IActionResult ArticleDetails(int id)

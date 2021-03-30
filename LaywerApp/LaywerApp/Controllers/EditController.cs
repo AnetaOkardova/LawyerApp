@@ -1,4 +1,5 @@
-﻿using LaywerApp.Mappings;
+﻿using LaywerApp.Common;
+using LaywerApp.Mappings;
 using LaywerApp.Models;
 using LaywerApp.Services.Interfaces;
 using LaywerApp.ViewModels;
@@ -18,6 +19,7 @@ namespace LaywerApp.Controllers
             _service = service;
         }
 
+
         public IActionResult EditOverview(string title, string name, string serviceTitle, string successMessage, string errorMessage)
         {
             var articles = _service.GetArticlesByTitle(title);
@@ -34,7 +36,6 @@ namespace LaywerApp.Controllers
 
             return View(articlesAndCollaborators);
         }
-
 
 
         [HttpGet]
@@ -68,9 +69,20 @@ namespace LaywerApp.Controllers
         [HttpGet]
         public IActionResult UpdateArticle(int id)
         {
-            var article = _service.GetArticleById(id);
-
-            return View(article.ToUpdateArticleModel());
+            try
+            {
+                var article = _service.GetArticleById(id);
+                return View(article.ToUpdateArticleModel());
+            }
+            catch (LaywerAppException ex)
+            {
+                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+            
         }
         [HttpPost]
         public IActionResult UpdateArticle(UpdateArticleModel article)
@@ -94,7 +106,6 @@ namespace LaywerApp.Controllers
                 return View(article);
             }
         }
-
 
 
         [HttpGet]
@@ -129,8 +140,19 @@ namespace LaywerApp.Controllers
         [HttpGet]
         public IActionResult UpdateCollaborator(int id)
         {
-            var collaborator = _service.GetCollaboratorById(id);
-            return View(collaborator.ToUpdateCollaboratorModel());
+             try
+            {
+                var collaborator = _service.GetCollaboratorById(id);
+                return View(collaborator.ToUpdateCollaboratorModel());
+            }
+            catch (LaywerAppException ex)
+            {
+                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
         }
         [HttpPost]
         public IActionResult UpdateCollaborator(UpdateCollaboratorModel collaborator)
@@ -154,7 +176,6 @@ namespace LaywerApp.Controllers
                 return View(collaborator);
             }
         }
-
 
 
         [HttpGet]
@@ -189,8 +210,19 @@ namespace LaywerApp.Controllers
         [HttpGet]
         public IActionResult UpdateLawService(int id)
         {
-            var service = _service.GetLawServicesById(id);
-            return View(service.ToUpdateLawServiceModel());
+            try
+            {
+                var service = _service.GetLawServicesById(id);
+                return View(service.ToUpdateLawServiceModel());
+            }
+            catch (LaywerAppException ex)
+            {
+                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
         }
         [HttpPost]
         public IActionResult UpdateLawService(UpdateLawServiceModel service)
