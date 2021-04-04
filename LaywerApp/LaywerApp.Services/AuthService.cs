@@ -36,9 +36,7 @@ namespace LaywerApp.Services
                     new Claim("IsAdmin", collaborator.IsAdmin.ToString()),
                     new Claim("Email", collaborator.Email),
                 };
-                //create licna karta
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                //create user
                 var principal = new ClaimsPrincipal(identity);
 
                 var authProps = new AuthenticationProperties() { IsPersistent = isPersistent };

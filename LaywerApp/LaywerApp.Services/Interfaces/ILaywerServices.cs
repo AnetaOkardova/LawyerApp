@@ -31,5 +31,6 @@ namespace LaywerApp.Services.Interfaces
         StatusModel UpdateCollaborator(Collaborator collaborator);
         StatusModel ToggleAdminRole(int id);
         StatusModel UpdateAdminPassword(Collaborator domainModel);
+        StatusModel CheckIfCorrectPassword(Collaborator collaborator, string curentPassword);
     }
 }

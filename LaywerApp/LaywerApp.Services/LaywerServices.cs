@@ -306,5 +306,20 @@ namespace LaywerApp.Services
             }
             return response;
         }
+
+        public StatusModel CheckIfCorrectPassword(Collaborator collaborator, string currentPassword)
+        {
+            var response = new StatusModel();
+            if (BCrypt.Net.BCrypt.Verify(currentPassword, collaborator.Password))
+            {
+                response.Success = true;
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = "Incorect current password";
+            }
+            return response;
+        }
     }
 }

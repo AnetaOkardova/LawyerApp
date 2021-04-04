@@ -245,8 +245,22 @@ namespace LaywerApp.Controllers
 
             if (ModelState.IsValid)
             {
-                _service.UpdateAdminPassword(domainModel);
-                return RedirectToAction("SignIn", "Auth");
+                var collaborator = _service.GetCollaboratorById(admin.Id);
+                if(collaborator == null)
+                {
+                    return RedirectToAction("ErrorNotFound", "Info");
+                }
+                var passwordIsvalid = _service.CheckIfCorrectPassword(collaborator, admin.CurrentPassword);
+                if (passwordIsvalid.Success)
+                {
+                    _service.UpdateAdminPassword(domainModel);
+                    return RedirectToAction("SignIn", "Auth");
+                }
+                else
+                {
+                    ViewBag.Message = passwordIsvalid.Message;
+                    return View(admin);
+                }
             }
             return View(admin);
         }
