@@ -3,6 +3,7 @@ using LaywerApp.Mappings;
 using LaywerApp.Models;
 using LaywerApp.Services.Interfaces;
 using LaywerApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,17 +23,21 @@ namespace LaywerApp.Controllers
 
         public IActionResult EditOverview(string title, string name, string serviceTitle, string successMessage, string errorMessage)
         {
-            var articles = _service.GetArticlesByTitle(title);
+            ViewBag.SuccessMessage = successMessage;
+            ViewBag.ErrorMessage = errorMessage;
+            var id = int.Parse(User.FindFirst("Id").Value);
             var collaborators = _service.GetCollaboratorsByName(name);
+            var collaboratorsToModify = collaborators.Where(x => x.Id != id).ToList();
+            var articles = _service.GetArticlesByTitle(title);
             var lawServices = _service.GetServicesByTitle(serviceTitle);
+
             var articlesAndCollaborators = new ArticlesCollaboratorsLawServices();
             articlesAndCollaborators.Articles = articles;
-            articlesAndCollaborators.Collaborators = collaborators;
+            articlesAndCollaborators.Collaborators = collaboratorsToModify;
             articlesAndCollaborators.LawServices = lawServices;
 
             ViewBag.SuccessMessage = successMessage;
             ViewBag.ErrorMessage = errorMessage;
-
 
             return View(articlesAndCollaborators);
         }
@@ -59,7 +64,7 @@ namespace LaywerApp.Controllers
             var response = _service.DeleteArticle(id);
             if (response.Success)
             {
-                return RedirectToAction( "EditOverview", new { SuccessMessage = response.Message });
+                return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
             }
             else
             {
@@ -82,7 +87,7 @@ namespace LaywerApp.Controllers
             {
                 return RedirectToAction("ErrorNotFound", "Info");
             }
-            
+
         }
         [HttpPost]
         public IActionResult UpdateArticle(UpdateArticleModel article)
@@ -140,7 +145,7 @@ namespace LaywerApp.Controllers
         [HttpGet]
         public IActionResult UpdateCollaborator(int id)
         {
-             try
+            try
             {
                 var collaborator = _service.GetCollaboratorById(id);
                 return View(collaborator.ToUpdateCollaboratorModel());
@@ -246,6 +251,19 @@ namespace LaywerApp.Controllers
                 return View(service);
             }
         }
-        
+        [Authorize(Policy = "IsAdmin")]
+        public IActionResult ToggleAdminRole(int id)
+        {
+            var response = _service.ToggleAdminRole(id);
+            if (response.Success)
+            {
+                return RedirectToAction("EditOverview", new { SuccessMessage = "User updated successfully." });
+            }
+            else
+            {
+                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
+            }
+        }
+
     }
 }

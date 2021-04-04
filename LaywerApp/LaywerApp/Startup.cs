@@ -2,6 +2,7 @@ using LaywerApp.Repositories;
 using LaywerApp.Repositories.Interfaces;
 using LaywerApp.Services;
 using LaywerApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,8 +30,28 @@ namespace LaywerApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LaywerAppDbContext>(x => x.UseSqlServer("Server=(localDb)\\MSSQLLocalDB;Database= LaywerApp; Trusted_Connection=True;"));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+                options =>
+                {
+                    options.LoginPath = "/Auth/SignIn";
+                    options.AccessDeniedPath = "/Auth/AccessDenied";
+                }
+                );
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdmin", policy =>
+                {
+                    policy.RequireClaim("IsAdmin", "True");
+                });
+            });
+
             services.AddControllersWithViews();
+
             services.AddTransient<ILaywerServices, LaywerServices>();
+            services.AddTransient<IAuthService, AuthService>();
+
             services.AddTransient<IArticlesRepository, ArticlesRepository>();
             services.AddTransient<ILawServicesRepository, LawServicesRepository>();
             services.AddTransient<ICollaboratorsRepository, CollaboratorsRepository>();
@@ -54,6 +75,8 @@ namespace LaywerApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

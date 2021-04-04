@@ -248,5 +248,24 @@ namespace LaywerApp.Services
         {
             _contactRequestsRepository.Add(contactRequest);
         }
+
+        public StatusModel ToggleAdminRole(int id)
+        {
+            var response = new StatusModel();
+            var collaborator = _collaboratorsRepository.GetById(id);
+            if (collaborator == null)
+            {
+                response.Success = false;
+                response.Message = $"There is no user with Id {id}";
+            }
+            else
+            {
+                response.Success = true;
+                collaborator.IsAdmin = !collaborator.IsAdmin;
+                _collaboratorsRepository.Update(collaborator);
+            }
+
+            return response;
+        }
     }
 }

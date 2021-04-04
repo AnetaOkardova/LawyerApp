@@ -77,20 +77,34 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach (var collaborator in Model.Collaborators)
                         {
-                            <tr>
-                                <td>@collaborator.Id</td>
-                                <td>@collaborator.Name @collaborator.LastName </td>
-                                <td class="text-center">
-                                    <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
-                                    <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>@collaborator.Id</td>
+                            <td>@collaborator.Name @collaborator.LastName </td>
+                            <td>@Html.DisplayFor(modelItem => collaborator.IsAdmin)</td>
+                            <td>
+                                @if (collaborator.IsAdmin)
+                                {
+                                    <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-danger">Remove admin role</a>
+                                }
+                                else
+                                {
+                                    <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-success">Add admin role</a>
+
+                                }
+                            </td>
+                            <td class="text-center">
+                                <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
+                                <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

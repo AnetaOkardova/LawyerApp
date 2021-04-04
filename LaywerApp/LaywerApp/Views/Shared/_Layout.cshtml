@@ -73,13 +73,45 @@
                                 </li>
                             </div>
                         </div>
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <li class="nav-item">
-                                    <a class="nav-link active onHover" aria-current="page" href="/Edit/EditOverview">Едитирање</a>
-                                </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (Convert.ToBoolean(User.FindFirst("isAdmin").Value))
+                            {
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <li class="nav-item">
+                                            <a class="nav-link active onHover" aria-current="page" href="/Auth/SignUp">Регистрирај се</a>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <li class="nav-item">
+                                            <a class="nav-link active onHover" aria-current="page" href="/Edit/EditOverview">Едитирање</a>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <li class="nav-item">
+                                            <a class="nav-link" aria-current="page" href="/Home/CollaboratorsDetails/@User.FindFirst("Id").Value">@User.FindFirst("Username").Value</a>
+                                        </li>
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                        else
+                        {
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <li class="nav-item">
+                                        <a class="nav-link active onHover" aria-current="page" href="/Auth/SignIn">Најави се</a>
+                                    </li>
+                                </div>
                             </div>
-                        </div>
+                        }
+
                     </ul>
                 </div>
             </nav>

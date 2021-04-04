@@ -14,6 +14,7 @@ namespace LaywerApp.Repositories.Interfaces
         void Add(Collaborator collaborator);
         void Delete(Collaborator collaborator);
         void Update(Collaborator collaborator);
-
+        Collaborator GetByUsername(string username);
+        bool CheckIfExists(string username, string email);
     }
 }

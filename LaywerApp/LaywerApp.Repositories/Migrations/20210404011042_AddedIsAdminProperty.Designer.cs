@@ -4,14 +4,16 @@ using LaywerApp.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LaywerApp.Repositories.Migrations
 {
     [DbContext(typeof(LaywerAppDbContext))]
-    partial class LaywerAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210404011042_AddedIsAdminProperty")]
+    partial class AddedIsAdminProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,12 +101,6 @@ namespace LaywerApp.Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

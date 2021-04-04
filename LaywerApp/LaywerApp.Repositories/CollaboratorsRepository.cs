@@ -44,5 +44,15 @@ namespace LaywerApp.Repositories
             _context.Collaborators.Update(collaborator);
             _context.SaveChanges();
         }
+
+        public Collaborator GetByUsername(string username)
+        {
+            return _context.Collaborators.FirstOrDefault(x => x.Username == username);
+        }
+
+        public bool CheckIfExists(string username, string email)
+        {
+            return _context.Collaborators.Any(x => x.Username == username || x.Email == email);
+        }
     }
 }

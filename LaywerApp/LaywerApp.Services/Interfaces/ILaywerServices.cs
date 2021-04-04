@@ -29,5 +29,6 @@ namespace LaywerApp.Services.Interfaces
         StatusModel UpdateArticle(Article article);
         StatusModel UpdateLawService(LawService service);
         StatusModel UpdateCollaborator(Collaborator collaborator);
+        StatusModel ToggleAdminRole(int id);
     }
 }

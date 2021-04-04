@@ -87,6 +87,29 @@ namespace LaywerApp.Mappings
                 ImageUrl = service.ImageUrl,
             };
         }
+        public static Collaborator ToModel(this SignInModel signInModel)
+        {
+            return new Collaborator()
+            {
+                Id =signInModel.Id,
+                Username = signInModel.Username,
+                Password = signInModel.Password,
+            };
+        }
+        public static Collaborator ToModel(this SignUpModel signUpModel)
+        {
+            return new Collaborator()
+            {
+                Username = signUpModel.Username,
+                Password = signUpModel.Password,
+                Name = signUpModel.Name,
+                LastName = signUpModel.Lastname,
+                Email = signUpModel.Email,
+                About = signUpModel.About,
+                ImageUrl = signUpModel.ImageUrl,
+                Status = signUpModel.Status,
+            };
+        }
 
         //public static LawService ToModel(this LawServiceCardModel service)
         //{
