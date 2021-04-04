@@ -77,5 +77,10 @@ namespace LaywerApp.Controllers
 
             return View(signUpModel);
         }
+        public IActionResult SignOut()
+        {
+            _service.SignOut(HttpContext);
+            return RedirectToAction("Main", "Home");
+        }
     }
 }

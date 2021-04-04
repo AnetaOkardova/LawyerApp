@@ -13,5 +13,6 @@ namespace LaywerApp.Services.Interfaces
     {
         StatusModel SignIn(string username, string password, bool isPersistent, HttpContext httpContext);
         StatusModel SignUp(Collaborator collaborator);
+        void SignOut(HttpContext httpContext);
     }
 }

@@ -83,5 +83,10 @@ namespace LaywerApp.Services
             }
             return response;
         }
+
+        public void SignOut(HttpContext httpContext)
+        {
+            Task.Run(() => httpContext.SignOutAsync()).GetAwaiter().GetResult();
+        }
     }
 }

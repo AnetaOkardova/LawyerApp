@@ -253,6 +253,7 @@ namespace LaywerApp.Services
         {
             var response = new StatusModel();
             var collaborator = _collaboratorsRepository.GetById(id);
+            
             if (collaborator == null)
             {
                 response.Success = false;
@@ -262,6 +263,17 @@ namespace LaywerApp.Services
             {
                 response.Success = true;
                 collaborator.IsAdmin = !collaborator.IsAdmin;
+                if (collaborator.IsAdmin)
+                {
+                    collaborator.Username = collaborator.Name + collaborator.LastName;
+                    collaborator.Password = "$2a$11$Dhv.M95aYbNgnvPPXiZZ6eGmg23a4U0HuOAohCtk7H2sH0zs8pp9m";
+                }
+                else
+                {
+                    collaborator.Username = null;
+                    collaborator.Password = null;
+                }
+                
                 _collaboratorsRepository.Update(collaborator);
             }
 
