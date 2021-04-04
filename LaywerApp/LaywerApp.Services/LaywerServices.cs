@@ -229,8 +229,12 @@ namespace LaywerApp.Services
             else
             {
                 collaboratorToUpdate.Name = collaborator.Name;
+                collaboratorToUpdate.NameInLatin = collaborator.NameInLatin;
+
                 collaboratorToUpdate.ImageUrl = collaborator.ImageUrl;
                 collaboratorToUpdate.LastName = collaborator.LastName;
+                collaboratorToUpdate.LastNameInLatin = collaborator.LastNameInLatin;
+
                 collaboratorToUpdate.Email = collaborator.Email;
                 collaboratorToUpdate.About = collaborator.About;
                 collaboratorToUpdate.Status = collaborator.Status;
@@ -265,7 +269,7 @@ namespace LaywerApp.Services
                 collaborator.IsAdmin = !collaborator.IsAdmin;
                 if (collaborator.IsAdmin)
                 {
-                    collaborator.Username = collaborator.Name + collaborator.LastName;
+                    collaborator.Username = collaborator.NameInLatin[0] + "." + collaborator.LastNameInLatin;
                     collaborator.Password = "$2a$11$Dhv.M95aYbNgnvPPXiZZ6eGmg23a4U0HuOAohCtk7H2sH0zs8pp9m";
                 }
                 else

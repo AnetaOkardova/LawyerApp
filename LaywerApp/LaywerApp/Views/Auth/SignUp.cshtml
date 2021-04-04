@@ -23,14 +23,24 @@
             <form asp-action="SignUp" asp-controller="Auth" asp-action="SignUp" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Name" class="control-label">Name</label>
+                    <label asp-for="Name" class="control-label">Име</label>
                     <input type="text" asp-for="Name" class="form-control" required />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Lastname" class="control-label">Lastname</label>
-                    <input type="text" asp-for="Lastname" class="form-control" required />
-                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                    <label asp-for="NameInLatin" class="control-label">Име на латиница</label>
+                    <input type="text" asp-for="NameInLatin" class="form-control" required />
+                    <span asp-validation-for="NameInLatin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label">Презиме</label>
+                    <input type="text" asp-for="LastName" class="form-control" required />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastNameInLatin" class="control-label">Презиме на латиница</label>
+                    <input type="text" asp-for="LastNameInLatin" class="form-control" required />
+                    <span asp-validation-for="LastNameInLatin" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Status" class="control-label">Статус</label>

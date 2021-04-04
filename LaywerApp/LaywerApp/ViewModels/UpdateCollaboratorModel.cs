@@ -14,7 +14,13 @@ namespace LaywerApp.ViewModels
         public string Name { get; set; }
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 2)]
+        public string NameInLatin { get; set; }
+        [Required]
+        [StringLength(maximumLength: 20, MinimumLength = 2)]
         public string LastName { get; set; }
+        [Required]
+        [StringLength(maximumLength: 20, MinimumLength = 2)]
+        public string LastNameInLatin { get; set; }
         [Required]
         [StringLength(maximumLength: 20)]
         public string Status { get; set; }

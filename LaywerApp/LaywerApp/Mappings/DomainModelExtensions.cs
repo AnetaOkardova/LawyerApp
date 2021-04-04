@@ -34,6 +34,19 @@ namespace LaywerApp.Mappings
                 Status = collaborator.Status
             };
         }
+        public static UpdateAdminModel ToUpdateAdminModel(this Collaborator collaborator)
+        {
+            return new UpdateAdminModel()
+            {
+                Id = collaborator.Id,
+                Name = collaborator.Name,
+                LastName = collaborator.LastName,
+                Email = collaborator.Email,
+                ImageUrl = collaborator.ImageUrl,
+                About = collaborator.About,
+                Status = collaborator.Status
+            };
+        }
         public static UpdateLawServiceModel ToUpdateLawServiceModel(this LawService service)
         {
             return new UpdateLawServiceModel()
@@ -65,6 +78,7 @@ namespace LaywerApp.Mappings
                 About = collaborator.About,
                 Status = collaborator.Status,
                 ImageUrl = collaborator.ImageUrl,
+                Email = collaborator.Email,
             };
         }
         public static LawServiceDetailsModel ToLawServiceDetailsModel(this LawService service)
@@ -78,11 +92,26 @@ namespace LaywerApp.Mappings
             };
         }
 
+        public static AdminDetailsModel ToAdminDetailsModel(this Collaborator collaborator)
+        {
+            return new AdminDetailsModel()
+            {
+                Id = collaborator.Id,
+                Name = collaborator.Name,
+                NameInLatin = collaborator.NameInLatin,
+                LastName = collaborator.LastName,
+                LastNameInLatin = collaborator.LastNameInLatin,
+                About = collaborator.About,
+                Status = collaborator.Status,
+                ImageUrl = collaborator.ImageUrl,
+                Email = collaborator.Email,
+            };
+        }
         public static LawServiceCardModel ToLawServiceCardModel(this LawService service)
         {
             return new LawServiceCardModel()
             {
-                Id= service.Id,
+                Id = service.Id,
                 Title = service.Title,
                 ImageUrl = service.ImageUrl,
             };

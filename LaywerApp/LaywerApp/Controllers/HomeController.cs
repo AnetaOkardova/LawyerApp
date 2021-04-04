@@ -1,4 +1,5 @@
-﻿using LaywerApp.Mappings;
+﻿using LaywerApp.Common;
+using LaywerApp.Mappings;
 using LaywerApp.Models;
 using LaywerApp.Services.Interfaces;
 using LaywerApp.ViewModels;
@@ -72,33 +73,73 @@ namespace LaywerApp.Controllers
 
         public IActionResult ArticleDetails(int id)
         {
-            var article = _service.GetArticleById(id);
-            if (article == null)
+            try
+            {
+                var article = _service.GetArticleById(id);
+                if (article == null)
+                {
+                    return RedirectToAction("ErrorNotFound", "Info");
+                }
+                return View(article.ToArticleDetailsModel());
+            }
+            catch (LaywerAppException)
             {
                 return RedirectToAction("ErrorNotFound", "Info");
             }
-            return View(article.ToArticleDetailsModel());
+
         }
         public IActionResult CollaboratorsDetails(int id)
         {
-            var collaborator = _service.GetCollaboratorById(id);
+            try
+            {
+                var collaborator = _service.GetCollaboratorById(id);
 
-            if (collaborator == null)
+                if (collaborator == null)
+                {
+                    return RedirectToAction("ErrorNotFound", "Info");
+                }
+                return View(collaborator.ToCollaboratorsDetailsModel());
+            }
+            catch (LaywerAppException)
             {
                 return RedirectToAction("ErrorNotFound", "Info");
             }
-            return View(collaborator.ToCollaboratorsDetailsModel());
+
         }
         public IActionResult LawServiceDetails(int id)
         {
-            var service = _service.GetLawServicesById(id);
+            try
+            {
+                var service = _service.GetLawServicesById(id);
 
-            if (service == null)
+                if (service == null)
+                {
+                    return RedirectToAction("ErrorNotFound", "Info");
+                }
+                return View(service.ToLawServiceDetailsModel());
+            }
+            catch (LaywerAppException)
             {
                 return RedirectToAction("ErrorNotFound", "Info");
             }
-            return View(service.ToLawServiceDetailsModel());
         }
+        public IActionResult AdminDetails(int id)
+        {
+            try
+            {
+                var collaborator = _service.GetCollaboratorById(id);
 
+                if (collaborator == null)
+                {
+                    return RedirectToAction("ErrorNotFound", "Info");
+                }
+                return View(collaborator.ToAdminDetailsModel());
+            }
+            catch (LaywerAppException)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+
+        }
     }
 }

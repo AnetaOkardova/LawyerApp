@@ -25,7 +25,11 @@ namespace LaywerApp.Mappings
             return new Collaborator()
             {
                 Name = collaborator.Name,
+                NameInLatin = collaborator.NameInLatin,
+
                 LastName = collaborator.LastName,
+                LastNameInLatin = collaborator.LastNameInLatin,
+
                 Email = collaborator.Email,
                 ImageUrl = collaborator.ImageUrl,
                 Status = collaborator.Status,
@@ -70,7 +74,28 @@ namespace LaywerApp.Mappings
             {
                 Id = collaborator.Id,
                 Name = collaborator.Name,
+                NameInLatin = collaborator.NameInLatin,
+
                 LastName = collaborator.LastName,
+                LastNameInLatin = collaborator.LastNameInLatin,
+
+                Email = collaborator.Email,
+                ImageUrl = collaborator.ImageUrl,
+                Status = collaborator.Status,
+                About = collaborator.About
+            };
+        }
+        public static Collaborator ToModel(this UpdateAdminModel collaborator)
+        {
+            return new Collaborator()
+            {
+                Id = collaborator.Id,
+                Name = collaborator.Name,
+                NameInLatin = collaborator.NameInLatin,
+
+                LastName = collaborator.LastName,
+                LastNameInLatin = collaborator.LastNameInLatin,
+
                 Email = collaborator.Email,
                 ImageUrl = collaborator.ImageUrl,
                 Status = collaborator.Status,
@@ -103,11 +128,15 @@ namespace LaywerApp.Mappings
                 Username = signUpModel.Username,
                 Password = signUpModel.Password,
                 Name = signUpModel.Name,
-                LastName = signUpModel.Lastname,
+                NameInLatin = signUpModel.NameInLatin,
+
+                LastName = signUpModel.LastName,
+                LastNameInLatin = signUpModel.LastNameInLatin,
+
                 Email = signUpModel.Email,
                 About = signUpModel.About,
                 ImageUrl = signUpModel.ImageUrl,
-                Status = signUpModel.Status,
+                Status = signUpModel.Status
             };
         }
 

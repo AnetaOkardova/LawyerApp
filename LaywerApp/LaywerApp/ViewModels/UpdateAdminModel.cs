@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace LaywerApp.ViewModels
 {
-    public class CreateCollaboratorModel
+    public class UpdateAdminModel
     {
+        public int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 2)]
         public string Name { get; set; }

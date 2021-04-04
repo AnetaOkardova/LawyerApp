@@ -20,7 +20,6 @@ namespace LaywerApp.Controllers
             _service = service;
         }
 
-
         public IActionResult EditOverview(string title, string name, string serviceTitle, string successMessage, string errorMessage)
         {
             ViewBag.SuccessMessage = successMessage;
@@ -42,7 +41,6 @@ namespace LaywerApp.Controllers
             return View(articlesAndCollaborators);
         }
 
-
         [HttpGet]
         public IActionResult CreateArticle()
         {
@@ -55,7 +53,7 @@ namespace LaywerApp.Controllers
             if (ModelState.IsValid)
             {
                 _service.CreateArticle(domainModel);
-                return RedirectToAction("Main", "Home");
+                return RedirectToAction("EditOverview");
             }
             return View(article);
         }
@@ -126,7 +124,7 @@ namespace LaywerApp.Controllers
             if (ModelState.IsValid)
             {
                 _service.CreateCollaborator(domainModel);
-                return RedirectToAction("Main", "Home");
+                return RedirectToAction("EditOverview");
             }
             return View(collaborator);
         }
@@ -182,6 +180,59 @@ namespace LaywerApp.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult UpdateAdmin(int id)
+        {
+            try
+            {
+
+                var collaborator = _service.GetCollaboratorById(id);
+                return View(collaborator.ToUpdateAdminModel());
+            }
+            catch (LaywerAppException ex)
+            {
+                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorNotFound", "Info");
+            }
+        }
+        [HttpPost]
+        public IActionResult UpdateAdmin(UpdateAdminModel admin)
+        {
+            var domainModel = admin.ToModel();
+
+            if (ModelState.IsValid)
+            {
+                var response = _service.UpdateCollaborator(domainModel);
+                if (response.Success)
+                {
+                    return RedirectToAction("Main", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("Main", "Home");
+                }
+            }
+            else
+            {
+                return View(admin);
+            }
+        }
+        [Authorize(Policy = "IsAdmin")]
+        public IActionResult ToggleAdminRole(int id)
+        {
+            var response = _service.ToggleAdminRole(id);
+            if (response.Success)
+            {
+                return RedirectToAction("EditOverview", new { SuccessMessage = "User updated successfully." });
+            }
+            else
+            {
+                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
+            }
+        }
 
         [HttpGet]
         public IActionResult CreateLawService()
@@ -196,7 +247,7 @@ namespace LaywerApp.Controllers
             if (ModelState.IsValid)
             {
                 _service.CreateLawService(domainModel);
-                return RedirectToAction("Main", "Home");
+                return RedirectToAction("EditOverview");
             }
             return View(lawService);
         }
@@ -251,19 +302,8 @@ namespace LaywerApp.Controllers
                 return View(service);
             }
         }
-        [Authorize(Policy = "IsAdmin")]
-        public IActionResult ToggleAdminRole(int id)
-        {
-            var response = _service.ToggleAdminRole(id);
-            if (response.Success)
-            {
-                return RedirectToAction("EditOverview", new { SuccessMessage = "User updated successfully." });
-            }
-            else
-            {
-                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-            }
-        }
+        
+        
 
     }
 }

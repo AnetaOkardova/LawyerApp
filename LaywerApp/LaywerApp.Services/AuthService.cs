@@ -70,7 +70,11 @@ namespace LaywerApp.Services
                 {
                     Username = collaborator.Username,
                     Name = collaborator.Name,
+                    NameInLatin = collaborator.NameInLatin,
+
                     LastName = collaborator.LastName,
+                    LastNameInLatin = collaborator.LastNameInLatin,
+
                     Password = BCrypt.Net.BCrypt.HashPassword(collaborator.Password),
                     Email = collaborator.Email,
                     Status = collaborator.Status,

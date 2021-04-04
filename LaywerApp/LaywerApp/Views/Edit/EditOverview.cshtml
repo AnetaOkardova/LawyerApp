@@ -8,20 +8,24 @@
 
 @if (ViewBag.SuccessMessage != null)
 {
-    <div class="alert alert-success m-3" role="alert" style="width:800px">
-        @ViewBag.SuccessMessage
+    <div class="row justify-content-center">
+        <div class="alert alert-success m-3" role="alert" style="width:800px">
+            @ViewBag.SuccessMessage
+        </div>
     </div>
 }
 @if (ViewBag.ErrorMessage != null)
 {
-    <div class="alert alert-success m-3" role="alert" style="width:800px">
-        @ViewBag.ErrorMessage
+    <div class="row justify-content-center">
+        <div class="alert alert-success m-3" role="alert" style="width:800px">
+            @ViewBag.ErrorMessage
+        </div>
     </div>
 }
 
-<div class="container">
+<div class="container overflow-auto" style="height: 20rem">
     <div class="row justify-content-center">
-        <div class="col m-1 p-5">
+        <div class="col m-1 p-1 mt-3">
             <p>
                 <a href="/Edit/CreateArticle" class="btn btn-success">Create article</a>
             </p>
@@ -59,9 +63,9 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container overflow-auto" style="height: 20rem">
     <div class="row justify-content-center">
-        <div class="col m-5 p-5">
+        <div class="col m-1 p-1">
             <p>
                 <a href="/Edit/CreateCollaborator" class="btn btn-success">Create collaborator</a>
             </p>
@@ -85,26 +89,26 @@
 
                         @foreach (var collaborator in Model.Collaborators)
                         {
-                        <tr>
-                            <td>@collaborator.Id</td>
-                            <td>@collaborator.Name @collaborator.LastName </td>
-                            <td>@Html.DisplayFor(modelItem => collaborator.IsAdmin)</td>
-                            <td>
-                                @if (collaborator.IsAdmin)
-                                {
-                                    <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-danger">Remove admin role</a>
-                                }
-                                else
-                                {
-                                    <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-success">Add admin role</a>
+                            <tr>
+                                <td>@collaborator.Id</td>
+                                <td>@collaborator.Name @collaborator.LastName </td>
+                                <td>@Html.DisplayFor(modelItem => collaborator.IsAdmin)</td>
+                                <td>
+                                    @if (collaborator.IsAdmin)
+                                    {
+                                        <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-danger">Remove admin role</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-success">Add admin role</a>
 
-                                }
-                            </td>
-                            <td class="text-center">
-                                <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
-                                <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
-                            </td>
-                        </tr>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
+                                    <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -112,9 +116,9 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container overflow-auto" style="height: 20rem">
     <div class="row justify-content-center">
-        <div class="col m-5 p-5">
+        <div class="col m-1 p-1">
             <p>
                 <a href="/Edit/CreateLawService" class="btn btn-success">Create service</a>
             </p>
