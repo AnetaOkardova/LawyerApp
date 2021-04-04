@@ -58,10 +58,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding: 5px">Ажурирај податоци</td>
+                    <td style="padding: 5px">Промени лозинка</td>
                     <td style="padding: 5px">
                         <p>
-                            <a href="/Edit/ChangePassword" class="btn btn-success">Change password</a>
+                            <a asp-controller="Edit" asp-action="ChangePassword" asp-route-id="@Model.Id" class="btn btn-success">Change password</a>
                         </p>
                     </td>
                 </tr>

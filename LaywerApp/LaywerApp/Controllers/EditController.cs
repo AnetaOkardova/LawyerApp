@@ -233,6 +233,28 @@ namespace LaywerApp.Controllers
                 return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
             }
         }
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordModel admin)
+        {
+            var domainModel = admin.ToModel();
+
+            if (ModelState.IsValid)
+            {
+                _service.UpdateAdminPassword(domainModel);
+                return RedirectToAction("SignIn", "Auth");
+            }
+            return View(admin);
+        }
+
+
+
+        
+
 
         [HttpGet]
         public IActionResult CreateLawService()

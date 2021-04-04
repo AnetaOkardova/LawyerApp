@@ -30,5 +30,6 @@ namespace LaywerApp.Services.Interfaces
         StatusModel UpdateLawService(LawService service);
         StatusModel UpdateCollaborator(Collaborator collaborator);
         StatusModel ToggleAdminRole(int id);
+        StatusModel UpdateAdminPassword(Collaborator domainModel);
     }
 }

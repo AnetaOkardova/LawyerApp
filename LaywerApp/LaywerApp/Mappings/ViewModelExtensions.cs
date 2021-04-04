@@ -102,6 +102,14 @@ namespace LaywerApp.Mappings
                 About = collaborator.About
             };
         }
+        public static Collaborator ToModel(this ChangePasswordModel admin)
+        {
+            return new Collaborator()
+            {
+                Id = admin.Id,
+                Password = admin.NewPassword,
+            };
+        }
         public static LawService ToModel(this UpdateLawServiceModel service)
         {
             return new LawService()
@@ -112,6 +120,7 @@ namespace LaywerApp.Mappings
                 ImageUrl = service.ImageUrl,
             };
         }
+
         public static Collaborator ToModel(this SignInModel signInModel)
         {
             return new Collaborator()

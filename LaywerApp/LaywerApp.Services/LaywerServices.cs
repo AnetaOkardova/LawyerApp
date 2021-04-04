@@ -283,5 +283,28 @@ namespace LaywerApp.Services
 
             return response;
         }
+
+        public StatusModel UpdateAdminPassword(Collaborator collaborator)
+        {
+            var response = new StatusModel();
+            var collaboratorToUpdate = _collaboratorsRepository.GetById(collaborator.Id);
+
+
+            if (collaboratorToUpdate == null)
+            {
+                response.Success = false;
+                response.Message = $"The admin with ID {collaborator.Id} is not found.";
+            }
+            else
+            {
+                collaboratorToUpdate.Password = BCrypt.Net.BCrypt.HashPassword(collaborator.Password);
+
+                _collaboratorsRepository.Update(collaboratorToUpdate);
+
+                response.Success = true;
+                response.Message = "The password has been successfully updated.";
+            }
+            return response;
+        }
     }
 }
