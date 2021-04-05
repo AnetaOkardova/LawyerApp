@@ -136,6 +136,7 @@ namespace LaywerApp.Mappings
                 Title = article.Title,
                 ShortDescription = article.ShortDescription,
                 ImageUrl = article.ImageUrl,
+                DateCreated = article.DateCreated,
             };
         }
     }

@@ -24,26 +24,13 @@ namespace LaywerApp.Controllers
         public IActionResult Main(string title, string name, string serviceTitle)
         {
             var articles = _service.GetArticlesByTitle(title);
-            var newArticles = new List<ArticleCardModel>();
-            foreach (var article in articles)
-            {
-                var newArticle = article.ToArticleCardModel();
-                newArticles.Add(newArticle);
-            }
+            var newArticles = articles.Select(x => x.ToArticleCardModel()).ToList();
+            
             var collaborators = _service.GetCollaboratorsByName(name);
-            var newCollaborators = new List<CollaboratorCardModel>();
-            foreach (var collaborator in collaborators)
-            {
-                var newCollaborator = collaborator.ToCollaboratorCardModel();
-                newCollaborators.Add(newCollaborator);
-            }
+            var newCollaborators = collaborators.Select(x => x.ToCollaboratorCardModel()).ToList();
+            
             var lawServices = _service.GetServicesByTitle(serviceTitle);
-            var newServices = new List<LawServiceCardModel>();
-            foreach (var service in lawServices)
-            {
-                var newService = service.ToLawServiceCardModel();
-                newServices.Add(newService);
-            }
+            var newServices = lawServices.Select(x => x.ToLawServiceCardModel()).ToList();
 
             var overviewModel = new OverviewModel();
             overviewModel.Articles = newArticles;
