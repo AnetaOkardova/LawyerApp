@@ -11,14 +11,23 @@
 }
 
 .backgroundImage {
-    background-image: none;
+    background-image: url("https://cdn.wallpapersafari.com/90/9/Q3nUhL.png");
 }
 
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {
     .backgroundImage {
-        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8_Z_v_-NGzjY7YD8yGkVRHcwTQcJmFfBFGt_mpqzEwdGh404Ofgpmf7rrWyh7W1A3hAg&usqp=CAU");
+        background-image: url("https://cdn.wallpapersafari.com/90/9/Q3nUhL.png");
+        color: khaki;
     }
 }
+.textKhaki {
+    color: black;
+}
+@media (min-width: 992px) {
+    .textKhaki {
+        color: khaki;
+    }
+}*/
 .onHover:hover
 {
     border: 1px solid black;

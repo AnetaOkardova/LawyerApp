@@ -122,7 +122,9 @@ namespace LaywerApp.Mappings
             {
                 Id = collaborator.Id,
                 Name = collaborator.Name,
+                NameInLatin = collaborator.NameInLatin,
                 LastName = collaborator.LastName,
+                LastNameInLatin = collaborator.LastNameInLatin,
                 Status = collaborator.Status,
                 ImageUrl = collaborator.ImageUrl,
                 About = collaborator.About

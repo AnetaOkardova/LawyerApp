@@ -148,37 +148,5 @@ namespace LaywerApp.Mappings
                 Status = signUpModel.Status
             };
         }
-
-        //public static LawService ToModel(this LawServiceCardModel service)
-        //{
-        //    return new LawService()
-        //    {
-        //        Id = service.Id,
-        //        Title = service.Title,
-        //        ImageUrl = service.ImageUrl,
-        //    };
-        //}
-        //public static Collaborator ToModel(this CollaboratorCardModel collaborator)
-        //{
-        //    return new Collaborator()
-        //    {
-        //        Id = collaborator.Id,
-        //        Name = collaborator.Name,
-        //        LastName = collaborator.LastName,
-        //        Status = collaborator.Status,
-        //        ImageUrl = collaborator.ImageUrl,
-        //        About = collaborator.About
-        //    };
-        //}
-        //public static Article ToModel(this ArticleCardModel article)
-        //{
-        //    return new Article()
-        //    {
-        //        Id = article.Id,
-        //        Title = article.Title,
-        //        ShortDescription = article.ShortDescription,
-        //        ImageUrl = article.ImageUrl,
-        //    };
-        //}
     }
 }
