@@ -32,5 +32,8 @@ namespace LaywerApp.Services.Interfaces
         StatusModel ToggleAdminRole(int id);
         StatusModel UpdateAdminPassword(Collaborator domainModel);
         StatusModel CheckIfCorrectPassword(Collaborator collaborator, string curentPassword);
+        Article GetArticleWithDetails(int id);
+        Collaborator GetCollaboratorWithDetails(int id);
+        LawService GetLawServiceWithDetails(int id);
     }
 }

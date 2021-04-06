@@ -20,5 +20,7 @@ namespace LaywerApp.Models
         [Required]
         public string Source { get; set; }
         public DateTime? DateUpdated { get; set; }
+        public int Views { get; set; }
+
     }
 }

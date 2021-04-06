@@ -62,7 +62,7 @@ namespace LaywerApp.Controllers
         {
             try
             {
-                var article = _service.GetArticleById(id);
+                var article = _service.GetArticleWithDetails(id);
                 if (article == null)
                 {
                     return RedirectToAction("ErrorNotFound", "Info");
@@ -79,7 +79,7 @@ namespace LaywerApp.Controllers
         {
             try
             {
-                var collaborator = _service.GetCollaboratorById(id);
+                var collaborator = _service.GetCollaboratorWithDetails(id);
 
                 if (collaborator == null)
                 {
@@ -97,7 +97,7 @@ namespace LaywerApp.Controllers
         {
             try
             {
-                var service = _service.GetLawServicesById(id);
+                var service = _service.GetLawServiceWithDetails(id);
 
                 if (service == null)
                 {

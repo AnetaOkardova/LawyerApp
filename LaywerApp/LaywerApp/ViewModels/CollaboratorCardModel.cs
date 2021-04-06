@@ -17,6 +17,8 @@ namespace LaywerApp.ViewModels
         public string Status { get; set; }
         public string ImageUrl { get; set; }
         public string About { get; set; }
+        public int Views { get; set; }
+
 
     }
 }

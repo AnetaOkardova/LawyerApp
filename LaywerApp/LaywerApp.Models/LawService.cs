@@ -17,5 +17,7 @@ namespace LaywerApp.Models
         [Required]
         public string ImageUrl { get; set; }
         public DateTime? DateUpdated { get; set; }
+        public int Views { get; set; }
+
     }
 }

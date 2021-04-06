@@ -47,6 +47,17 @@ namespace LaywerApp.Services
 
             return selectedArticle;
         }
+        public Article GetArticleWithDetails(int id)
+        {
+            var article = GetArticleById(id);
+            if (article == null)
+            {
+                return article;
+            }
+            article.Views++;
+            _articlesRepository.Update(article);
+            return article;
+        }
         public void CreateArticle(Article article)
         {
             _articlesRepository.Add(article);
@@ -121,6 +132,17 @@ namespace LaywerApp.Services
 
             return selectedService;
         }
+        public LawService GetLawServiceWithDetails(int id)
+        {
+            var service = GetLawServicesById(id);
+            if (service == null)
+            {
+                return service;
+            }
+            service.Views++;
+            _lawServicesRepository.Update(service);
+            return service;
+        }
         public void CreateLawService(LawService lawService)
         {
             _lawServicesRepository.Add(lawService);
@@ -192,6 +214,17 @@ namespace LaywerApp.Services
 
             return selectedCollaborator;
         }
+        public Collaborator GetCollaboratorWithDetails(int id)
+        {
+            var collaborator = GetCollaboratorById(id);
+            if (collaborator == null)
+            {
+                return collaborator;
+            }
+            collaborator.Views++;
+            _collaboratorsRepository.Update(collaborator);
+            return collaborator;
+        }
         public void CreateCollaborator(Collaborator collaborator)
         {
             _collaboratorsRepository.Add(collaborator);
@@ -252,12 +285,11 @@ namespace LaywerApp.Services
         {
             _contactRequestsRepository.Add(contactRequest);
         }
-
         public StatusModel ToggleAdminRole(int id)
         {
             var response = new StatusModel();
             var collaborator = _collaboratorsRepository.GetById(id);
-            
+
             if (collaborator == null)
             {
                 response.Success = false;
@@ -277,13 +309,12 @@ namespace LaywerApp.Services
                     collaborator.Username = null;
                     collaborator.Password = null;
                 }
-                
+
                 _collaboratorsRepository.Update(collaborator);
             }
 
             return response;
         }
-
         public StatusModel UpdateAdminPassword(Collaborator collaborator)
         {
             var response = new StatusModel();
@@ -306,7 +337,6 @@ namespace LaywerApp.Services
             }
             return response;
         }
-
         public StatusModel CheckIfCorrectPassword(Collaborator collaborator, string currentPassword)
         {
             var response = new StatusModel();

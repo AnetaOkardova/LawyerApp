@@ -45,6 +45,7 @@ namespace LaywerApp.Mappings
                 ImageUrl = service.ImageUrl
             };
         }
+
         public static ContactRequest ToModel(this ContactRequestModel request)
         {
             return new ContactRequest()

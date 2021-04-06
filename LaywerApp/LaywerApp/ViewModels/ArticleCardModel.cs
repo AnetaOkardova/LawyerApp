@@ -12,5 +12,6 @@ namespace LaywerApp.ViewModels
         public string ShortDescription { get; set; }
         public string ImageUrl { get; set; }
         public DateTime DateCreated { get; set; }
+        public int Views { get; set; }
     }
 }

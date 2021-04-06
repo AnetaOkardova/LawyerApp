@@ -107,6 +107,7 @@ namespace LaywerApp.Mappings
                 Email = collaborator.Email,
             };
         }
+
         public static LawServiceCardModel ToLawServiceCardModel(this LawService service)
         {
             return new LawServiceCardModel()
@@ -114,6 +115,7 @@ namespace LaywerApp.Mappings
                 Id = service.Id,
                 Title = service.Title,
                 ImageUrl = service.ImageUrl,
+                Views = service.Views
             };
         }
         public static CollaboratorCardModel ToCollaboratorCardModel(this Collaborator collaborator)
@@ -127,7 +129,8 @@ namespace LaywerApp.Mappings
                 LastNameInLatin = collaborator.LastNameInLatin,
                 Status = collaborator.Status,
                 ImageUrl = collaborator.ImageUrl,
-                About = collaborator.About
+                About = collaborator.About,
+                Views = collaborator.Views
             };
         }
         public static ArticleCardModel ToArticleCardModel(this Article article)
@@ -139,6 +142,7 @@ namespace LaywerApp.Mappings
                 ShortDescription = article.ShortDescription,
                 ImageUrl = article.ImageUrl,
                 DateCreated = article.DateCreated,
+                Views = article.Views
             };
         }
     }
