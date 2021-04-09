@@ -9,69 +9,35 @@
     var top5Articles = Model.Articles.OrderByDescending(x => x.Views).Take(5).ToList();
 }
 
+<div class="container-fluid p-2">
+    <div class=" row justify-content-center align-items-center">
+        <div class="col-2">
+        </div>
+        <div class="col-6">
+            <partial name="PartialMainPageCarousel">
+        </div>
+        <div class="col-2">
+        </div>
+        <div class="col-2">
+            <div class="customShadow p-1" style="border: 1px solid gray; width:200px; border-radius: 10px">
+                <h5>Најпосетувани услуги</h5>
+                <div class="justify-content-center">
+                    @foreach (var service in top5LawServices)
+                    {
+                        <div sstyle="padding: 2px;">
+                            <h6>
+                                <a asp-controller="Home" asp-action="LawServiceDetails" asp-route-id="@service.Id">@service.Title</a>
+                            </h6>
+                            <p>Views: @service.Views</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
 
-<div class=" container-fluid p-2">
-    <div class=" row justify-content-center">
-        <div class="col-md-2">
-        </div>
-        <div class="col p-6 mt-4">
-            <div id="carousel" class="carousel slide col" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="~/Images/general-law-1.jpg" class="d-block w-100" style="height:350px" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="~/Images/general-law-2.jpg" class="d-block w-100" style="height:350px" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="~/Images/general-law-3.jpg" class="d-block w-100" style="height:350px" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-2 m-3 p-3 customShadow" style="border: 1px solid gray; border-radius: 10px">
-            <h5>Најпосетувани услуги</h5>
-            <div class="justify-content-center">
-                @foreach (var service in top5LawServices)
-                {
-                    <div sstyle="padding: 2px;">
-                        <h6>
-                            <a asp-controller="Home" asp-action="LawServiceDetails" asp-route-id="@service.Id">@service.Title</a>
-                        </h6>
-                        <p>Views: @service.Views</p>
-                    </div>
-                }
-            </div>
-        </div>
     </div>
 </div>
+
 
 @*<div class="backgroundImage" style="border-radius: 50px">
         <div class="bg-light customShadow" style="border-radius: 50px">
@@ -80,175 +46,78 @@
             </div>
         </div>
     </div>*@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4 customShadow" style="background-color: rgb(107,0,0); height:15px"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3 customShadow" style="background-color: rgb(107,0,0); height:10px"></div>
-        <div class="col-md-1 "></div>
-        <div class="col-md-2 customShadow" style="background-color: rgb(107,0,0); height:5px"></div>
-        <div class="col-md"></div>
-        <div class="col-md customShadow" style="background-color: rgb(107,0,0); height:3px"></div>
 
-    </div>
-</div>
+<partial name="PartialMainPageSeparator">
 
-
-<div class="container-fluid mt-5" id="aboutUs">
-    <div class="row justify-content-sm-center align-items-center">
-        <div class="col ml-3">
-            <h1 class="text-center">За нас</h1>
-            <p class="text-justify p-3">
-                @admin.About
-            </p>
-        </div>
-        <div class="backgroundImage" style="border-radius: 50%; width: 500px; height: 500px">
-            <div class="col">
-                <img src="@admin.ImageUrl" class="customShadow ml-3" style="border-radius: 50%; width:450px; height: 450px" />
+    <div class="container-fluid mt-5" id="aboutUs">
+        <div class="row justify-content-sm-center align-items-center">
+            <div class="col ml-3">
+                <h1 class="text-center">За нас</h1>
+                <p class="text-justify p-3">
+                    @admin.About
+                </p>
+            </div>
+            <div class="backgroundImage" style="border-radius: 50%; width: 500px; height: 500px">
+                <div class="col">
+                    <img src="@admin.ImageUrl" class="customShadow ml-3" style="border-radius: 50%; width:450px; height: 450px" />
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md customShadow" style="background-color: rgb(107,0,0); height:3px"></div>
-        <div class="col-md"></div>
-        <div class="col-md-2 customShadow" style="background-color: rgb(107,0,0); height:5px"></div>
-        <div class="col-md-1 "></div>
-        <div class="col-md-3 customShadow" style="background-color: rgb(107,0,0); height:10px"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4 customShadow" style="background-color: rgb(107,0,0); height:15px"></div>
-    </div>
-</div>
-<div class="container-fluid" style="height:50px"></div>
-<div class="container-fluid overflow-auto" id="articles" style="height: 38rem">
-    <div class="row p-5 justify-content-center">
-        @foreach (var article in Model.Articles.OrderByDescending(x => x.DateCreated).ToList())
-        {
-            <div class="col-7 p-3">
-                <div class="cusomShadow" style="width: 50rem; border: 1px solid black">
-                    <table>
-                        <tr>
-                            <td style="width: 30%">
-                                <img style="width: 100%; height: 150px" src="@article.ImageUrl" class="card-img-top" alt="...">
-                            </td>
-                            <td style="width:70%">
+    <partial name="PartialMainPageSeparatorReversed">
+
+        <div class="container-fluid" style="height:50px"></div>
+        <div class="container-fluid overflow-auto" id="articles" style="height: 38rem">
+            <div class="row p-5 justify-content-center">
+                @foreach (var article in Model.Articles.OrderByDescending(x => x.DateCreated).ToList())
+                {
+                    <div class="col-7 p-3">
+                        <div class="cusomShadow" style="width: 50rem; border: 1px solid black">
+                            <table>
+                                <tr>
+                                    <td style="width: 30%">
+                                        <img style="width: 100%; height: 150px" src="@article.ImageUrl" class="card-img-top" alt="...">
+                                    </td>
+                                    <td style="width:70%">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@article.Title</h5>
+                                            <p class="card-text">@article.ShortDescription</p>
+                                            <a asp-controller="Home" asp-action="ArticleDetails" asp-route-id="@article.Id" class="btn btn-success">See description</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="container-fluid" style="height:50px"></div>
+
+        <partial name="PartialMainPageSeparator">
+
+            <div class="container-fluid m-5 p-5">
+                <div class="row" id="collaborators">
+                    @foreach (var collaborator in Model.Collaborators)
+                    {
+                        <div class="col-md-3 p-3">
+                            <div class="card customShadow" style="width: 18rem; height:450px">
+                                <img style="width: 100%; height: 300px" src="@collaborator.ImageUrl" class="card-img-top" alt="Collaborator's photo">
                                 <div class="card-body">
-                                    <h5 class="card-title">@article.Title</h5>
-                                    <p class="card-text">@article.ShortDescription</p>
-                                    <a asp-controller="Home" asp-action="ArticleDetails" asp-route-id="@article.Id" class="btn btn-success">See description</a>
+                                    <h5 class="card-title">@collaborator.Status @collaborator.Name @collaborator.LastName</h5>
+                                    <a asp-controller="Home" asp-action="CollaboratorsDetails" asp-route-id="@collaborator.Id" class="btn btn-primary">See more</a>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-        }
-    </div>
-</div>
-<div class="container-fluid" style="height:50px"></div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4 customShadow" style="background-color: rgb(107,0,0); height:15px"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3 customShadow" style="background-color: rgb(107,0,0); height:10px"></div>
-        <div class="col-md-1 "></div>
-        <div class="col-md-2 customShadow" style="background-color: rgb(107,0,0); height:5px"></div>
-        <div class="col-md"></div>
-        <div class="col-md customShadow" style="background-color: rgb(107,0,0); height:3px"></div>
+            <partial name="PartialMainPageSeparatorReversed">
 
-    </div>
-</div>
-<div class="container-fluid m-5 p-5">
-    <div class="row" id="collaborators">
-        @foreach (var collaborator in Model.Collaborators)
-        {
-            <div class="col-md-3 p-3">
-                <div class="card customShadow" style="width: 18rem; height:450px">
-                    <img style="width: 100%; height: 300px" src="@collaborator.ImageUrl" class="card-img-top" alt="Collaborator's photo">
-                    <div class="card-body">
-                        <h5 class="card-title">@collaborator.Status @collaborator.Name @collaborator.LastName</h5>
-                        <a asp-controller="Home" asp-action="CollaboratorsDetails" asp-route-id="@collaborator.Id" class="btn btn-primary">See more</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md customShadow" style="background-color: rgb(107,0,0); height:3px"></div>
-        <div class="col-md"></div>
-        <div class="col-md-2 customShadow" style="background-color: rgb(107,0,0); height:5px"></div>
-        <div class="col-md-1 "></div>
-        <div class="col-md-3 customShadow" style="background-color: rgb(107,0,0); height:10px"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4 customShadow" style="background-color: rgb(107,0,0); height:15px"></div>
-    </div>
-</div>
+                <partial name="PartialLawServiceCard" for="@Model.LawServices">
 
-<div class="row p-5 container-fluid">
-    <div class="row justify-content-md-center">
-        @foreach (var service in Model.LawServices)
-        {
-            <div class="col-md-3 ">
-                <div class="card customShadow p-3 m-3" style="width: 20rem;">
-                    <img style="width: 100%; border-radius: 50px" src="@service.ImageUrl" class="card-img-top" alt="Service image">
-                    <div class="card-body">
-                        <a asp-controller="Home" asp-action="LawServiceDetails" asp-route-id="@service.Id" class="card-title text-success">@service.Title</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
-@section footer{
-    <div class="container-fluid backgroundImage p-3">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-md-7">
-                <h3 class="text-white">Контакт информации</h3>
-                <table class="align-items-center mt-5">
-                    <tr>
-                        <th><img style="width: 25px" src="data:image/png;base64,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" /></th>
-                        <th class="text-white">Детали за контакт</th>
-                    </tr>
-                    <tr>
-                        <th class="text-white">E-mail</th>
-                        <td class="text-white">advokat.krstevska@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Tel</th>
-                        <td class="text-white">0038977777777</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Address</th>
-                        <td class="text-white">Адреса: Улица „Петричка“ број 6/1/1-36, Центар, 1000 Скопје</td>
-                    </tr>
-                    <tr>
-                        <th><img style="width: 75px" src="https://www.creativefabrica.com/wp-content/uploads/2018/11/Clock-timer-logo-by-Mansel-Brist-2-580x406.jpg" /></th>
-                        <th class="text-white">Работно време</th>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Понеделник до петок</th>
-                        <td class="text-white">08:00 - 17:00 часот</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Сабота</th>
-                        <td class="text-white">Затворено</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Недела</th>
-                        <td class="text-white">Затворено</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-9">
-
-            </div>
-        </div>
-    </div>
-}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+                    @section footer{
+                        <partial name="PartialFooterView">
+                    }
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

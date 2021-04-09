@@ -27,65 +27,8 @@
     </div>
 }
 
-<div class="row p-3">
-    @foreach (var service in Model)
-    {
-        <div class="col-md-3 p-1">
-            <div class="card customShadow" style="width: 18rem;">
-                <img style="width: 100%; height: 300px" src="@service.ImageUrl" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h6 class="card-title">@service.Title</h6>
-                    <a asp-controller="Home" asp-action="LawServiceDetails" asp-route-id="@service.Id" class="btn btn-primary">See description</a>
-                </div>
-            </div>
-        </div>
+<partial name="PartialLawServiceCard" for="@Model">
+
+    @section footer{
+        <partial name="PartialFooterView">
     }
-</div>
-
-@section footer{
-    <div class="container-fluid backgroundImage p-3">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-md-7">
-                <h3 class="text-white">Контакт информации</h3>
-                <table class="align-items-center mt-5">
-                    <tr>
-                        <th><img style="width: 25px" src="data:image/png;base64,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" /></th>
-                        <th class="text-white">Детали за контакт</th>
-                    </tr>
-                    <tr>
-                        <th class="text-white">E-mail</th>
-                        <td class="text-white">advokat.krstevska@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Tel</th>
-                        <td class="text-white">0038977777777</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Address</th>
-                        <td class="text-white">Адреса: Улица „Петричка“ број 6/1/1-36, Центар, 1000 Скопје</td>
-                    </tr>
-                    <tr>
-                        <th><img style="width: 75px" src="https://www.creativefabrica.com/wp-content/uploads/2018/11/Clock-timer-logo-by-Mansel-Brist-2-580x406.jpg" /></th>
-                        <th class="text-white">Работно време</th>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Понеделник до петок</th>
-                        <td class="text-white">08:00 - 17:00 часот</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Сабота</th>
-                        <td class="text-white">Затворено</td>
-                    </tr>
-                    <tr>
-                        <th class="text-white">Недела</th>
-                        <td class="text-white">Затворено</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-9">
-
-            </div>
-        </div>
-    </div>
-}
