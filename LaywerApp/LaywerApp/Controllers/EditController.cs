@@ -14,10 +14,16 @@ namespace LaywerApp.Controllers
 {
     public class EditController : Controller
     {
-        private ILaywerServices _service { get; set; }
-        public EditController(ILaywerServices service)
+        private readonly ILawServicesService _lawServicesService;
+        private readonly ICollaboratorsService _collaboratorsService;
+        private readonly IArticlesService _articlesService;
+        //private ILaywerServices _service { get; set; }
+        public EditController( ILawServicesService lawServicesService, ICollaboratorsService collaboratorsService, IArticlesService articlesService)
         {
-            _service = service;
+            //_service = service;
+            _lawServicesService = lawServicesService;
+            _collaboratorsService = collaboratorsService;
+            _articlesService = articlesService;
         }
 
         public IActionResult EditOverview(string title, string name, string serviceTitle, string successMessage, string errorMessage)
@@ -25,10 +31,11 @@ namespace LaywerApp.Controllers
             ViewBag.SuccessMessage = successMessage;
             ViewBag.ErrorMessage = errorMessage;
             var id = int.Parse(User.FindFirst("Id").Value);
-            var collaborators = _service.GetCollaboratorsByName(name);
+            var collaborators = _collaboratorsService.GetCollaboratorsByName(name);
             var collaboratorsToModify = collaborators.Where(x => x.Id != id).ToList();
-            var articles = _service.GetArticlesByTitle(title);
-            var lawServices = _service.GetServicesByTitle(serviceTitle);
+            //put this method in Articles Service
+            var articles = _articlesService.GetArticlesByTitle(title);
+            var lawServices = _lawServicesService.GetServicesByTitle(serviceTitle);
 
             var articlesAndCollaborators = new ArticlesCollaboratorsLawServices();
             articlesAndCollaborators.Articles = articles;
@@ -40,306 +47,6 @@ namespace LaywerApp.Controllers
 
             return View(articlesAndCollaborators);
         }
-
-        [HttpGet]
-        public IActionResult CreateArticle()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult CreateArticle(CreateArticleModel article)
-        {
-            var domainModel = article.ToModel();
-            if (ModelState.IsValid)
-            {
-                _service.CreateArticle(domainModel);
-                return RedirectToAction("EditOverview");
-            }
-            return View(article);
-        }
-        public IActionResult DeleteArticle(int id)
-        {
-            var response = _service.DeleteArticle(id);
-            if (response.Success)
-            {
-                return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
-            }
-            else
-            {
-                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-            }
-        }
-        [HttpGet]
-        public IActionResult UpdateArticle(int id)
-        {
-            try
-            {
-                var article = _service.GetArticleById(id);
-                return View(article.ToUpdateArticleModel());
-            }
-            catch (LaywerAppException ex)
-            {
-                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorNotFound", "Info");
-            }
-
-        }
-        [HttpPost]
-        public IActionResult UpdateArticle(UpdateArticleModel article)
-        {
-            var domainModel = article.ToModel();
-
-            if (ModelState.IsValid)
-            {
-                var response = _service.UpdateArticle(domainModel);
-                if (response.Success)
-                {
-                    return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
-                }
-                else
-                {
-                    return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-                }
-            }
-            else
-            {
-                return View(article);
-            }
-        }
-
-
-        [HttpGet]
-        public IActionResult CreateCollaborator()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult CreateCollaborator(CreateCollaboratorModel collaborator)
-        {
-            var domainModel = collaborator.ToModel();
-
-            if (ModelState.IsValid)
-            {
-                _service.CreateCollaborator(domainModel);
-                return RedirectToAction("EditOverview");
-            }
-            return View(collaborator);
-        }
-        public IActionResult DeleteCollaborator(int id)
-        {
-            var response = _service.DeleteCollaborator(id);
-            if (response.Success)
-            {
-                return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
-            }
-            else
-            {
-                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-            }
-        }
-        [HttpGet]
-        public IActionResult UpdateCollaborator(int id)
-        {
-            try
-            {
-                var collaborator = _service.GetCollaboratorById(id);
-                return View(collaborator.ToUpdateCollaboratorModel());
-            }
-            catch (LaywerAppException ex)
-            {
-                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorNotFound", "Info");
-            }
-        }
-        [HttpPost]
-        public IActionResult UpdateCollaborator(UpdateCollaboratorModel collaborator)
-        {
-            var domainModel = collaborator.ToModel();
-
-            if (ModelState.IsValid)
-            {
-                var response = _service.UpdateCollaborator(domainModel);
-                if (response.Success)
-                {
-                    return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
-                }
-                else
-                {
-                    return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-                }
-            }
-            else
-            {
-                return View(collaborator);
-            }
-        }
-
-        [HttpGet]
-        public IActionResult UpdateAdmin(int id)
-        {
-            try
-            {
-
-                var collaborator = _service.GetCollaboratorById(id);
-                return View(collaborator.ToUpdateAdminModel());
-            }
-            catch (LaywerAppException ex)
-            {
-                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorNotFound", "Info");
-            }
-        }
-        [HttpPost]
-        public IActionResult UpdateAdmin(UpdateAdminModel admin)
-        {
-            var domainModel = admin.ToModel();
-
-            if (ModelState.IsValid)
-            {
-                var response = _service.UpdateCollaborator(domainModel);
-                if (response.Success)
-                {
-                    return RedirectToAction("Main", "Home");
-                }
-                else
-                {
-                    return RedirectToAction("Main", "Home");
-                }
-            }
-            else
-            {
-                return View(admin);
-            }
-        }
-        [Authorize(Policy = "IsAdmin")]
-        public IActionResult ToggleAdminRole(int id)
-        {
-            var response = _service.ToggleAdminRole(id);
-            if (response.Success)
-            {
-                return RedirectToAction("EditOverview", new { SuccessMessage = "User updated successfully." });
-            }
-            else
-            {
-                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-            }
-        }
-        [HttpGet]
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult ChangePassword(ChangePasswordModel admin)
-        {
-            var domainModel = admin.ToModel();
-
-            if (ModelState.IsValid)
-            {
-                var collaborator = _service.GetCollaboratorById(admin.Id);
-                if(collaborator == null)
-                {
-                    return RedirectToAction("ErrorNotFound", "Info");
-                }
-                var passwordIsvalid = _service.CheckIfCorrectPassword(collaborator, admin.CurrentPassword);
-                if (passwordIsvalid.Success)
-                {
-                    _service.UpdateAdminPassword(domainModel);
-                    return RedirectToAction("SignIn", "Auth");
-                }
-                else
-                {
-                    ViewBag.Message = passwordIsvalid.Message;
-                    return View(admin);
-                }
-            }
-            return View(admin);
-        }
-
-
-
         
-
-
-        [HttpGet]
-        public IActionResult CreateLawService()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult CreateLawService(CreateLawServiceModel lawService)
-        {
-            var domainModel = lawService.ToModel();
-
-            if (ModelState.IsValid)
-            {
-                _service.CreateLawService(domainModel);
-                return RedirectToAction("EditOverview");
-            }
-            return View(lawService);
-        }
-        public IActionResult DeleteLawService(int id)
-        {
-            var response = _service.DeleteLawService(id);
-            if (response.Success)
-            {
-                return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
-            }
-            else
-            {
-                return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-            }
-        }
-        [HttpGet]
-        public IActionResult UpdateLawService(int id)
-        {
-            try
-            {
-                var service = _service.GetLawServicesById(id);
-                return View(service.ToUpdateLawServiceModel());
-            }
-            catch (LaywerAppException ex)
-            {
-                return RedirectToAction("ActionNotSuccessful", "Info", new { Message = ex.Message });
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorNotFound", "Info");
-            }
-        }
-        [HttpPost]
-        public IActionResult UpdateLawService(UpdateLawServiceModel service)
-        {
-            var domainModel = service.ToModel();
-
-            if (ModelState.IsValid)
-            {
-                var response = _service.UpdateLawService(domainModel);
-                if (response.Success)
-                {
-                    return RedirectToAction("EditOverview", new { SuccessMessage = response.Message });
-                }
-                else
-                {
-                    return RedirectToAction("EditOverview", new { ErrorMessage = response.Message });
-                }
-            }
-            else
-            {
-                return View(service);
-            }
-        }
-        
-        
-
     }
 }

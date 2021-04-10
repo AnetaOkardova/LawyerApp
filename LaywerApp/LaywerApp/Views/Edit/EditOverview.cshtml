@@ -27,7 +27,7 @@
     <div class="row justify-content-center">
         <div class="col m-1 p-1 mt-3">
             <p>
-                <a href="/Edit/CreateArticle" class="btn btn-success">Create article</a>
+                <a href="/Articles/CreateArticle" class="btn btn-success">Create article</a>
             </p>
             @if (Model.Articles.Count == 0)
             {
@@ -51,8 +51,8 @@
                                 <td>@article.Id</td>
                                 <td>@article.Title</td>
                                 <td class="text-center">
-                                    <a href="/Edit/UpdateArticle/@article.Id" class="text-primary">Modify</a> |
-                                    <a href="/Edit/DeleteArticle/@article.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                                    <a href="/Articles/UpdateArticle/@article.Id" class="text-primary">Modify</a> |
+                                    <a href="/Articles/DeleteArticle/@article.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -67,7 +67,7 @@
     <div class="row justify-content-center">
         <div class="col m-1 p-1">
             <p>
-                <a href="/Edit/CreateCollaborator" class="btn btn-success">Create collaborator</a>
+                <a href="/Collaborators/CreateCollaborator" class="btn btn-success">Create collaborator</a>
             </p>
             @if (Model.Collaborators.Count == 0)
             {
@@ -96,17 +96,17 @@
                                 <td>
                                     @if (collaborator.IsAdmin)
                                     {
-                                        <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-danger">Remove admin role</a>
+                                        <a href="/Collaborators/ToggleAdminRole/@collaborator.Id" class="text-danger">Remove admin role</a>
                                     }
                                     else
                                     {
-                                        <a href="/Edit/ToggleAdminRole/@collaborator.Id" class="text-success">Add admin role</a>
+                                        <a href="/Collaborators/ToggleAdminRole/@collaborator.Id" class="text-success">Add admin role</a>
 
                                     }
                                 </td>
                                 <td class="text-center">
-                                    <a href="/Edit/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
-                                    <a href="/Edit/DeleteCollaborator/@collaborator.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                                    <a href="/Collaborators/UpdateCollaborator/@collaborator.Id" class="text-primary">Modify</a> |
+                                    <a href="/Collaborators/DeleteCollaborator/@collaborator.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -120,7 +120,7 @@
     <div class="row justify-content-center">
         <div class="col m-1 p-1">
             <p>
-                <a href="/Edit/CreateLawService" class="btn btn-success">Create service</a>
+                <a href="/LawServices/CreateLawService" class="btn btn-success">Create service</a>
             </p>
             @if (Model.LawServices.Count == 0)
             {
@@ -143,8 +143,8 @@
                                 <td>@service.Id</td>
                                 <td>@service.Title</td>
                                 <td class="text-center">
-                                    <a href="/Edit/UpdateLawService/@service.Id" class="text-primary">Modify</a> |
-                                    <a href="/Edit/DeleteLawService/@service.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
+                                    <a href="/LawServices/UpdateLawService/@service.Id" class="text-primary">Modify</a> |
+                                    <a href="/LawServices/DeleteLawService/@service.Id" class="text-danger" onclick="return confirm ('Are you sure?')">Delete</a>
                                 </td>
                             </tr>
                         }

@@ -6,7 +6,6 @@
     ViewBag.Title = "Main page";
     var admin = Model.Collaborators.FirstOrDefault(x => x.NameInLatin == "Kostadinka" && x.LastNameInLatin == "Krstevska");
     var top5LawServices = Model.LawServices.OrderByDescending(x => x.Views).Take(5).ToList();
-    var top5Articles = Model.Articles.OrderByDescending(x => x.Views).Take(5).ToList();
 }
 
 <div class="container-fluid p-2">
@@ -26,7 +25,7 @@
                     {
                         <div sstyle="padding: 2px;">
                             <h6>
-                                <a asp-controller="Home" asp-action="LawServiceDetails" asp-route-id="@service.Id">@service.Title</a>
+                                <a asp-controller="LawServices" asp-action="LawServiceDetails" asp-route-id="@service.Id">@service.Title</a>
                             </h6>
                             <p>Views: @service.Views</p>
                         </div>
@@ -46,78 +45,91 @@
             </div>
         </div>
     </div>*@
+<div class="container-fluid">
+    <partial name="PartialMainPageSeparator">
+</div>
 
-<partial name="PartialMainPageSeparator">
-
-    <div class="container-fluid mt-5" id="aboutUs">
-        <div class="row justify-content-sm-center align-items-center">
-            <div class="col ml-3">
-                <h1 class="text-center">За нас</h1>
-                <p class="text-justify p-3">
-                    @admin.About
-                </p>
-            </div>
-            <div class="backgroundImage" style="border-radius: 50%; width: 500px; height: 500px">
-                <div class="col">
-                    <img src="@admin.ImageUrl" class="customShadow ml-3" style="border-radius: 50%; width:450px; height: 450px" />
-                </div>
+<div class="container-fluid mt-5 mb-5" id="aboutUs">
+    <div class="row justify-content-sm-center align-items-center">
+        <div class="col ml-3">
+            <h1 class="text-center">За нас</h1>
+            <p class="text-justify p-3">
+                @admin.About
+            </p>
+        </div>
+        <div class="backgroundImage" style="border-radius: 50%; width: 500px; height: 500px">
+            <div class="col">
+                <img src="@admin.ImageUrl" class="customShadow ml-3" style="border-radius: 50%; width:450px; height: 450px" />
             </div>
         </div>
     </div>
+</div>
 
+<div class="container-fluid">
     <partial name="PartialMainPageSeparatorReversed">
+</div>
 
-        <div class="container-fluid" style="height:50px"></div>
-        <div class="container-fluid overflow-auto" id="articles" style="height: 38rem">
-            <div class="row p-5 justify-content-center">
-                @foreach (var article in Model.Articles.OrderByDescending(x => x.DateCreated).ToList())
-                {
-                    <div class="col-7 p-3">
-                        <div class="cusomShadow" style="width: 50rem; border: 1px solid black">
-                            <table>
-                                <tr>
-                                    <td style="width: 30%">
-                                        <img style="width: 100%; height: 150px" src="@article.ImageUrl" class="card-img-top" alt="...">
-                                    </td>
-                                    <td style="width:70%">
-                                        <div class="card-body">
-                                            <h5 class="card-title">@article.Title</h5>
-                                            <p class="card-text">@article.ShortDescription</p>
-                                            <a asp-controller="Home" asp-action="ArticleDetails" asp-route-id="@article.Id" class="btn btn-success">See description</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="container-fluid" style="height:50px"></div>
-
-        <partial name="PartialMainPageSeparator">
-
-            <div class="container-fluid m-5 p-5">
-                <div class="row" id="collaborators">
-                    @foreach (var collaborator in Model.Collaborators)
-                    {
-                        <div class="col-md-3 p-3">
-                            <div class="card customShadow" style="width: 18rem; height:450px">
-                                <img style="width: 100%; height: 300px" src="@collaborator.ImageUrl" class="card-img-top" alt="Collaborator's photo">
+<div class="container-fluid overflow-auto" id="articles" style="height: 38rem">
+    <div class="row p-5 justify-content-center">
+        @foreach (var article in Model.Articles.OrderByDescending(x => x.DateCreated).ToList())
+        {
+            <div class="col-7 p-3">
+                <div class="cusomShadow" style="width: 50rem; border: 1px solid black">
+                    <table>
+                        <tr>
+                            <td style="width: 30%">
+                                <img style="width: 100%; height: 150px" src="@article.ImageUrl" class="card-img-top" alt="...">
+                            </td>
+                            <td style="width:70%">
                                 <div class="card-body">
-                                    <h5 class="card-title">@collaborator.Status @collaborator.Name @collaborator.LastName</h5>
-                                    <a asp-controller="Home" asp-action="CollaboratorsDetails" asp-route-id="@collaborator.Id" class="btn btn-primary">See more</a>
+                                    <h5 class="card-title">@article.Title</h5>
+                                    <p class="card-text">@article.ShortDescription</p>
+                                    <a asp-controller="Articles" asp-action="ArticleDetails" asp-route-id="@article.Id" class="btn btn-success">See description</a>
                                 </div>
-                            </div>
-                        </div>
-                    }
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <partial name="PartialMainPageSeparatorReversed">
+        }
+    </div>
+</div>
 
-                <partial name="PartialLawServiceCard" for="@Model.LawServices">
+<div class="container-fluid" style="height:50px"></div>
 
-                    @section footer{
-                        <partial name="PartialFooterView">
-                    }
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<div class="container-fluid">
+    <partial name="PartialMainPageSeparator">
+</div>
+
+<div class="container-fluid m-5 p-5">
+    <div class="row" id="collaborators">
+        @foreach (var collaborator in Model.Collaborators)
+        {
+            <div class="col-md-3 p-3">
+                <div class="card customShadow" style="width: 18rem; height:450px">
+                    <img style="width: 100%; height: 300px" src="@collaborator.ImageUrl" class="card-img-top" alt="Collaborator's photo">
+                    <div class="card-body">
+                        <h5 class="card-title">@collaborator.Status @collaborator.Name @collaborator.LastName</h5>
+                        <a asp-controller="Collaborators" asp-action="CollaboratorsDetails" asp-route-id="@collaborator.Id" class="btn btn-primary">See more</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container-fluid">
+    <partial name="PartialMainPageSeparatorReversed">
+</div>
+
+<div class="container-fluid">
+    <partial name="PartialLawServiceCard" for="@Model.LawServices">
+</div>
+
+@section footer{
+    <partial name="PartialFooterView">
+}
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+}

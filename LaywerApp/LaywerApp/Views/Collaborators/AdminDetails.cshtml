@@ -53,7 +53,7 @@
                     <td style="padding: 5px">Ажурирај податоци</td>
                     <td style="padding: 5px">
                         <p>
-                            <a asp-controller="Edit" asp-action="UpdateAdmin" asp-route-id="@Model.Id" class="btn btn-secondary">Ажурирај</a>
+                            <a asp-controller="Collaborators" asp-action="UpdateAdmin" asp-route-id="@Model.Id" class="btn btn-secondary">Ажурирај</a>
                         </p>
                     </td>
                 </tr>
@@ -61,7 +61,7 @@
                     <td style="padding: 5px">Промени лозинка</td>
                     <td style="padding: 5px">
                         <p>
-                            <a asp-controller="Edit" asp-action="ChangePassword" asp-route-id="@Model.Id" class="btn btn-success">Change password</a>
+                            <a asp-controller="Collaborators" asp-action="ChangePassword" asp-route-id="@Model.Id" class="btn btn-success">Change password</a>
                         </p>
                     </td>
                 </tr>
@@ -69,6 +69,7 @@
         </div>
     </div>
 </div>
+
 @section footer{
     <partial name="PartialFooterView">
 }

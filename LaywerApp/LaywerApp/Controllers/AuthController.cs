@@ -53,6 +53,7 @@ namespace LaywerApp.Controllers
         {
             return View();
         }
+        
         [HttpGet]
         public IActionResult SignUp()
         {
@@ -77,6 +78,7 @@ namespace LaywerApp.Controllers
 
             return View(signUpModel);
         }
+        
         public IActionResult SignOut()
         {
             _service.SignOut(HttpContext);

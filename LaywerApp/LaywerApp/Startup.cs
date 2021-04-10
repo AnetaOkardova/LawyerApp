@@ -51,6 +51,10 @@ namespace LaywerApp
 
             services.AddTransient<ILaywerServices, LaywerServices>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IArticlesService, ArticlesService>();
+            services.AddTransient<ICollaboratorsService, CollaboratorsService>();
+            services.AddTransient<ILawServicesService, LawServicesService>();
+
 
             services.AddTransient<IArticlesRepository, ArticlesRepository>();
             services.AddTransient<ILawServicesRepository, LawServicesRepository>();

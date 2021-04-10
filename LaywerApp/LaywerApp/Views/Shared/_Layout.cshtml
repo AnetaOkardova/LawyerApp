@@ -48,7 +48,7 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <li class="nav-item">
-                                    <a class="nav-link active onHover text-light" aria-current="page" href="/Home/LawServiceOverview">Услуги</a>
+                                    <a class="nav-link active onHover text-light" aria-current="page" href="/LawServices/LawServiceOverview">Услуги</a>
                                 </li>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <li class="nav-item">
-                                        <a class="nav-link text-light" aria-current="page" href="/Home/AdminDetails/@User.FindFirst("Id").Value">@User.FindFirst("Username").Value</a>
+                                        <a class="nav-link text-light" aria-current="page" href="/Collaborators/AdminDetails/@User.FindFirst("Id").Value">@User.FindFirst("Username").Value</a>
                                     </li>
                                 </div>
                             </div>
@@ -131,5 +131,7 @@
     @RenderSection("footer", required: false)
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>
